@@ -2,7 +2,7 @@
   <div class="container">
     <form>
       <h1 id="h1-welcome">
-        <span>Hol,</span>
+        <span>Hola,</span>
         <br>
         <span>Bienvenido</span>
         <br>
@@ -20,7 +20,7 @@
         <div id="link-forgot-container">
           <a (click)="goToForgotPassword()" id="forgot-password-link">¿Olvidaste tu contraseña?</a>
         </div>
-        <button id="login-button">Iniciar sesión</button>
+        <button id="login-button" (click)="goToTabnavAdmin()">Iniciar sesión</button>
         <a (click)="goToRegister()" id="register-link">¿No tienes una cuenta? Regístrate</a>
       </div>
     </form>

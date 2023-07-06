@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#h1-title-search {
+    font-weight: bold;
+    font-size: 32px;
+    color: #1E2B00;
+    margin: 0.5em 0 0 0.5em;
+}
+
+ion-list {
+    ion-item {
+        border-radius: 50px;
+        background: #ffffff;
+        color: #1E2B00;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        font-weight: bold;
+        box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+        &:hover{
+            border-color: #98B90A;
+        }
+    }
+
+}
