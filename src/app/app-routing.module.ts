@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'recover',
     loadChildren: () => import('./recover/recover.module').then( m => m.RecoverPageModule)
   },
+  {
+    path: 'tabnav-tutor',
+    loadChildren: () => import('./tabnav-tutor/tabnav-tutor.module').then( m => m.TabnavTutorPageModule)
+  },
 ];
 
 @NgModule({
