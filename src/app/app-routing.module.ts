@@ -27,6 +27,15 @@ const routes: Routes = [
     path: 'tabnav-tutor',
     loadChildren: () => import('./tabnav-tutor/tabnav-tutor.module').then( m => m.TabnavTutorPageModule)
   },
+  {
+    path: 'alumno',
+    loadChildren: () => import('./alumno/alumno.module').then( m => m.AlumnoPageModule)
+  },
+  {
+    path: 'tutor',
+    loadChildren: () => import('./tutor/tutor.module').then( m => m.TutorPageModule)
+  },
+  
 ];
 
 @NgModule({

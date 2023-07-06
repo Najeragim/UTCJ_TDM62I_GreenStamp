@@ -1,5 +1,8 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="container">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
     <form>
       <h1 id="h1-welcome">
         <span>Hola,</span>
@@ -24,7 +27,6 @@
           ¿Ya tienes una cuenta?
           <a (click)="goToLogin()" id="login-link"> Inicia sesión</a>
         </p>
-        
       </div>
     </form>
   </div>
