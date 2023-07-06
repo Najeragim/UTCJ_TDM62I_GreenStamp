@@ -1,3 +1,29 @@
-<ion-content>
-    
-</ion-content>
+<ion-header collapse="fade" class="ion-no-border">
+    <ion-toolbar>
+      <ion-title class="ion-text-center">
+        Nuevo tutor:
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <div class="container">
+      <form>
+        <ion-item lines="none" class="input-rounded ion-margin-bottom">
+          <ion-icon slot="start" name="person" color="secondary"></ion-icon>
+          <ion-input type="text" placeholder="Correo" color="primary"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="input-rounded ion-margin-bottom">
+          <ion-icon slot="start" name="key" color="secondary"></ion-icon>
+          <ion-input type="password" placeholder="Contraseña" color="primary"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="input-rounded ion-margin-bottom">
+          <ion-icon slot="start" name="key" color="secondary"></ion-icon>
+          <ion-input type="password" placeholder="Confirmar contraseña" color="primary"></ion-input>
+        </ion-item>
+        <button id="register-tutor-button">Registrar</button>
+        <ion-alert trigger="register-tutor-button" header="¡Registro exitoso!" message="Se ha registrado el tutor correctamente"
+          [buttons]="['OK']"></ion-alert>
+      </form>
+    </div>
+  </ion-content>

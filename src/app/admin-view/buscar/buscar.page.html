@@ -3,7 +3,7 @@
     <h1 id="h1-title-search">Busque sus listas</h1>
     <div class="container">
       <ion-fab slot="fixed" vertical="top" horizontal="end">
-        <ion-fab-button size="small">
+        <ion-fab-button size="small" (click)="goToLogin()">
           <ion-icon name="log-out-outline"></ion-icon>
         </ion-fab-button>
       </ion-fab>
@@ -54,6 +54,8 @@
         </tbody>
       </table>
       <button id="btn-gen-doc">Generar documento</button>
+      <ion-alert trigger="btn-gen-doc" header="¡Proceso exitoso!" message="Se ha generado su documento"
+        [buttons]="['OK']"></ion-alert>
     </div>
   </div>
 </ion-content>
