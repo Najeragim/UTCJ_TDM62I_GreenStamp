@@ -20,4 +20,8 @@ export class LoginPage implements OnInit {
   goToRegister(){
     this.router.navigate(['/register'])
   }
+
+  goToTabnavAdmin(){
+    this.router.navigate(['/tabnav-admin'])
+  }
 }

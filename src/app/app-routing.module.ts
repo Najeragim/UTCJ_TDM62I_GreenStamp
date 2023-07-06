@@ -24,8 +24,8 @@ const routes: Routes = [
     loadChildren: () => import('./recover/recover.module').then( m => m.RecoverPageModule)
   },
   {
-    path: 'tabnav-tutor',
-    loadChildren: () => import('./tabnav-tutor/tabnav-tutor.module').then( m => m.TabnavTutorPageModule)
+    path: 'tabnav-admin',
+    loadChildren: () => import('./admin-view/tabnav-admin/tabnav-admin.module').then( m => m.TabnavAdminPageModule)
   },
   {
     path: 'alumno',
