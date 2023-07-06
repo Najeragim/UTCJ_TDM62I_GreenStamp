@@ -2,6 +2,12 @@
   <div class="container ion-padding">
     <h1 id="h1-title-search">Busque sus listas</h1>
     <div class="container">
+      <ion-fab slot="fixed" vertical="top" horizontal="end">
+        <ion-fab-button size="small">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      
       <ion-list class="ion-padding custom-list">
         <ion-item>
           <ion-select aria-label="Materia" interface="popover" placeholder="Materia">
@@ -19,6 +25,35 @@
           </ion-select>
         </ion-item>
       </ion-list>
+      <table>
+        <!-- Encabezado de la tabla -->
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre completo</th>
+            <th>Asistencia</th>
+          </tr>
+        </thead>
+        <!-- Filas de la tabla -->
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>César Castillo</td>
+            <td>Presente</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Gianluca Nájera</td>
+            <td>Ausente</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Edgar Sánchez</td>
+            <td>Tardío</td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="btn-gen-doc">Generar documento</button>
     </div>
   </div>
 </ion-content>
