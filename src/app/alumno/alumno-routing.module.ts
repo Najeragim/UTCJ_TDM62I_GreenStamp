@@ -11,6 +11,14 @@ const routes: Routes = [
   {
     path: 'clases',
     loadChildren: () => import('./clases/clases.module').then( m => m.ClasesPageModule)
+  },
+  {
+    path: 'asis',
+    loadChildren: () => import('./asis/asis.module').then( m => m.AsisPageModule)
+  },
+  {
+    path: 'tabnav-alumno',
+    loadChildren: () => import('./tabnav-alumno/tabnav-alumno.module').then( m => m.TabnavAlumnoPageModule)
   }
 ];
 
