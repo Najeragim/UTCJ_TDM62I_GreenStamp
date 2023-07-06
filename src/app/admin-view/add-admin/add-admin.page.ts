@@ -11,5 +11,5 @@ export class AddAdminPage implements OnInit {
 
   ngOnInit() {
   }
-
+  
 }
