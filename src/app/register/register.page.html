@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="container">
+    <form>
+      <h1 id="h1-welcome">
+        <span>Hola,</span>
+        <br>
+        <span>Comencemos</span>
+      </h1>
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="person" color="secondary"></ion-icon>
+        <ion-input type="text" placeholder="Correo" color="primary"></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="key" color="secondary"></ion-icon>
+        <ion-input type="password" placeholder="Contraseña" color="primary"></ion-input>
+      </ion-item>
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="key" color="secondary"></ion-icon>
+        <ion-input type="password" placeholder="Confirmar contraseña" color="primary"></ion-input>
+      </ion-item>
+      <div class="form-links">
+        <button (click)="goToLogin()" id="register-button">Registrarse</button>
+        <p id="login-link-paragraph">
+          ¿Ya tienes una cuenta?
+          <a (click)="goToLogin()" id="login-link"> Inicia sesión</a>
+        </p>
+        
+      </div>
+    </form>
+  </div>
+</ion-content>
