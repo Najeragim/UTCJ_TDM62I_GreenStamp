@@ -1,13 +1,36 @@
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
+
+
+<ion-content>
+  <h1 id="h1-title-search">Hora</h1>
+  <div id="clock" class="container">
    
-    <ion-tab-button tab="clases">
-      <ion-icon name="book"></ion-icon>
-      Clases
-    </ion-tab-button>
-    <ion-tab-button tab="asis">
-      <ion-icon name="checkmark-outline"></ion-icon>
-      Asistencia
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+    <div class="digit" id="hours">00</div>
+    <div class="digit">:</div>
+    <div class="digit" id="minutes">00</div>
+    <div class="digit">:</div>
+    <div class="digit" id="seconds">00</div>
+  </div>
+  <div id="class-info" class="container">
+    <div id="subject">Materia</div>
+    <div id="professor">Profesor</div>
+    <div id="classroom">Salón</div>
+  </div>
+  <ion-fab slot="fixed" vertical="top" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="clases">
+        <ion-icon name="book"></ion-icon>
+        <ion-label>Clases</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="asis">
+        <ion-icon name="checkmark-outline"></ion-icon>
+        <ion-label>Asistencia</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
