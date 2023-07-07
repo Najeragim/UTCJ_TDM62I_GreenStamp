@@ -1,0 +1,101 @@
+/* Estilos generales */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Estilos para el reloj */
+#clock {
+  margin-bottom: 20px;
+}
+
+.clock-digits {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.digit {
+  padding: 0 10px;
+}
+
+/* Estilos para la información de la clase */
+#class-info {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.class {
+  margin-bottom: 20px;
+}
+
+.class h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.class p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.class h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+#class-info input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Estilos para el botón "Cerrar sesión" */
+#logout {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #555;
+  }
+}
+
+/* Estilos para el botón de log-out */
+ion-fab-button {
+  --background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  --color: #e02f36;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    --background: #e02f36;
+    --color: #FFFFFF;
+  }
+}
+
+#h1-title-search {
+  font-weight: bold;
+  font-size: 32px;
+  color: #1E2B00;
+  margin: 0.5em 0 0 0.5em;
+}

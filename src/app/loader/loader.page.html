@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+ 
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Loader</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="spinner-container" *ngIf="showProgressBar; else content">
+    <ion-spinner></ion-spinner>
+    <div class="loading-message">Cargando...</div>
+  </div>
+
+  <ng-template #content>
+    <div class="content-container fade-out">
+      <!-- Contenido de la página -->
+    </div>
+  </ng-template>
+</ion-content>
