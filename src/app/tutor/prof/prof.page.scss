@@ -8,68 +8,6 @@
     justify-content: center;
   }
   
-  /* Estilos para el reloj */
-  #clock {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 48px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .digit {
-    padding: 0 10px;
-  }
-  
-  /* Estilos para la información de la clase */
-  #class-info {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  #class-info div {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  /* Estilos para el botón "Cerrar sesión" */
-  #logout {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  #logout:hover {
-    background-color: #555;
-  }
-  
-  /* Estilos para el botón de log-out */
-  ion-fab-button {
-    --background: #FFFFFF;
-    border-radius: 50%;
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    --color: #e02f36;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    margin-bottom: 20px;
-    transition: background-color 0.3s ease;
-  }
-  
-  ion-fab-button:hover {
-    --background: #e02f36;
-    --color: #FFFFFF;
-  }
-  
   #h1-title-search {
     font-weight: bold;
     font-size: 32px;
@@ -91,7 +29,6 @@
   .subject-selection ion-select {
     --background: #FFFFFF;
     border-radius: 4px;
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     --color: #333;
     font-size: 16px;
     padding: 10px;
@@ -111,10 +48,17 @@
   .subject-selection ion-select::part(text) {
     font-size: 16px;
   }
- 
   
+  ion-list ion-item {
+    border-radius: 50px;
+    background: #ffffff;
+    color: #1E2B00;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  }
   
-  
-  
-  
+  ion-list ion-item:hover {
+    border-color: #98B90A;
+  }
   
