@@ -120,3 +120,29 @@ justify-content: center;
   display: flex;
   justify-content: center;
   }
+   /* Estilos para el botón de log-out */
+   ion-fab-button {
+    --background: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    --color: #e02f36;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      --background: #e02f36;
+      --color: #FFFFFF;
+    }
+  }
+  
+  #h1-title-search {
+    font-weight: bold;
+    font-size: 32px;
+    color: #1E2B00;
+    margin: 0.5em 0 0 0.5em;
+  }

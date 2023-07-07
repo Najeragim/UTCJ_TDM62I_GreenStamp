@@ -52,9 +52,9 @@
     [buttons]="['OK']"></ion-alert>
   
   
-  <ion-fab slot="fixed" vertical="top" horizontal="end" >
-    <ion-fab-button>
-      <ion-icon name="log-out-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-fab slot="fixed" vertical="top" horizontal="end" >
+      <ion-fab-button (click)="goToLogin()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>
