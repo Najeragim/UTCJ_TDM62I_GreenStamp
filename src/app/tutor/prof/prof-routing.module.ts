@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: ProfPage
+  },
+  {
+    path: 'materias',
+    loadChildren: () => import('./../../tutor/materias/materias.module').then(m => m.MateriasPageModule)
+  },
+  {
+    path: 'horarios',
+    loadChildren: () => import('./../../tutor/horarios/horarios.module').then(m => m.HorariosPageModule)
   }
 ];
 
