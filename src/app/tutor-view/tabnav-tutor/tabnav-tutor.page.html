@@ -1,13 +1,25 @@
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="listas">
-      <ion-icon name="book"></ion-icon>
-      <ion-label>listas</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="clases-pendientes">
-      <ion-icon name="time-outline"></ion-icon>
-      <ion-label>clases</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<ion-content [fullscreen]="true">
+  <div class="container ion-padding">
+  
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">prof</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
+    
+
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="clases">
+          <ion-icon name="book"></ion-icon>
+          <ion-label>listas</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="listas">
+          <ion-icon name="time-outline"></ion-icon>
+          <ion-label>clases</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </div>
+</ion-content>

@@ -5,7 +5,7 @@ describe('AsisPage', () => {
   let component: AsisPage;
   let fixture: ComponentFixture<AsisPage>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     fixture = TestBed.createComponent(AsisPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -15,3 +15,4 @@ describe('AsisPage', () => {
     expect(component).toBeTruthy();
   });
 });
+  

@@ -6,17 +6,14 @@ import { TabnavTutorPage } from './tabnav-tutor.page';
 const routes: Routes = [
   {
     path: '',
-    component: TabnavTutorPage,
-    children:[
-      {
-        path: 'clases-pendientes',
-        loadChildren: () => import('./../../tutor-view/clases-pendientes/clases-pendientes.module').then( m => m.ClasesPendientesPageModule)
-      },
-      {
-        path: 'listas',
-        loadChildren: () => import('./../../tutor-view/listas/listas.module').then( m => m.ListasPageModule)
-      },
-    ]
+    component: TabnavTutorPage, children:[{
+      path: 'clases',
+      loadChildren: () => import('./../../tutor-view/clases/clases-routing.module').then(m => m.ClasesPageRoutingModule )
+    },
+    {
+      path: 'listas',
+      loadChildren: () => import('./../../tutor-view/listas/listas-routing.module').then(m => m.ListasPageRoutingModule)
+    }]
   }
 ];
 

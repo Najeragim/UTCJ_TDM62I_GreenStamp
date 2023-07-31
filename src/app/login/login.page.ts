@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
   }
 
   goToTabnavTutor(){
-    this.router.navigate(['/tutor'])
+    this.router.navigate(['/tabnav-tutor'])
   }
 
   goToTabnavAlumno(){

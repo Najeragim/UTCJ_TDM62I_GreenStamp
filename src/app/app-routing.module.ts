@@ -32,10 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./alumno/alumno.module').then( m => m.AlumnoPageModule)
   },
   {
-    path: 'tutor',
-    loadChildren: () => import('./tutor/tutor.module').then( m => m.TutorPageModule)
-  },
-  {
     path: 'tabnav-alumno',
     loadChildren: () => import('./alumno/tabnav-alumno/tabnav-alumno.module').then( m => m.TabnavAlumnoPageModule)
   },
@@ -43,6 +39,18 @@ const routes: Routes = [
   {
     path: 'loader',
     loadChildren: () => import('./loader/loader.module').then( m => m.LoaderPageModule)
+  },
+  {
+    path: 'tabnav-tutor',
+    loadChildren: () => import('./tutor-view/tabnav-tutor/tabnav-tutor.module').then( m => m.TabnavTutorPageModule)
+  },
+  {
+    path: 'listas',
+    loadChildren: () => import('./tutor-view/listas/listas.module').then( m => m.ListasPageModule)
+  },
+  {
+    path: 'clases',
+    loadChildren: () => import('./tutor-view/clases/clases.module').then( m => m.ClasesPageModule)
   }
   
   
