@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AddTutorPageRoutingModule } from './add-tutor-routing.module';
 
 import { AddTutorPage } from './add-tutor.page';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddTutorPageRoutingModule
+    AddTutorPageRoutingModule,
+    HttpClientModule, // Agregar el módulo HttpClientModule aquí
   ],
   declarations: [AddTutorPage]
 })

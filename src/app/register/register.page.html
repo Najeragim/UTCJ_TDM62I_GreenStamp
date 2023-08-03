@@ -1,24 +1,42 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="container">
-    <form #registerForm="ngForm"> <!-- Agregar la referencia local "registerForm" -->
+    <form #registerForm="ngForm">
       <h1 id="h1-welcome">
         <span>Hola,</span>
         <br>
         <span>Comencemos</span>
       </h1>
+      <!-- Matricula -->
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="finger-print" color="secondary"></ion-icon>
+        <ion-input type="text" placeholder="Matrícula" color="primary" [(ngModel)]="matricula" name="matricula"></ion-input>
+      </ion-item>
+      <!-- RFID -->
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="id-card" color="secondary"></ion-icon>
+        <ion-input type="text" placeholder="RFID" color="primary" [(ngModel)]="rfid" name="rfid"></ion-input>
+      </ion-item>
+      <!-- Nombre -->
       <ion-item lines="none" class="input-rounded ion-margin-bottom">
         <ion-icon slot="start" name="person" color="secondary"></ion-icon>
-        <!-- Agregar el atributo "name" a cada campo de entrada de texto -->
+        <ion-input type="text" placeholder="Nombre completo (apellidos-nombre)" color="primary" [(ngModel)]="nombre" name="nombre" (input)="nombre = nombre.toUpperCase()"></ion-input>
+      </ion-item>
+      <!-- Email -->
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="mail" color="secondary"></ion-icon>
         <ion-input type="text" placeholder="Correo" color="primary" [(ngModel)]="email" name="email"></ion-input>
       </ion-item>
+      <!-- Contraseña -->
       <ion-item lines="none" class="input-rounded ion-margin-bottom">
         <ion-icon slot="start" name="key" color="secondary"></ion-icon>
         <ion-input type="password" placeholder="Contraseña" color="primary" [(ngModel)]="password" name="password"></ion-input>
       </ion-item>
+      <!-- Confirmar Contraseña -->
       <ion-item lines="none" class="input-rounded ion-margin-bottom">
         <ion-icon slot="start" name="key" color="secondary"></ion-icon>
         <ion-input type="password" placeholder="Confirmar contraseña" color="primary" [(ngModel)]="confirmPassword" name="confirmPassword"></ion-input>
       </ion-item>
+      <!-- Links -->
       <div class="form-links">
         <!-- Agregar el evento de clic al botón de registro -->
         <button type="button" (click)="register()" id="register-button">Registrarse</button>

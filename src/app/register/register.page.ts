@@ -7,13 +7,20 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
+
 export class RegisterPage implements OnInit {
+  matricula: String;
+  rfid: String;
+  nombre: String;
   email: string;
   password: string;
   confirmPassword: string;
 
   constructor(private router: Router, private http: HttpClient) {
     // Inicializar las variables aquí si es necesario
+    this.matricula = '';
+    this.rfid = '';
+    this.nombre = '';
     this.email = '';
     this.password = '';
     this.confirmPassword = '';
@@ -31,9 +38,15 @@ export class RegisterPage implements OnInit {
       return;
     }
 
-    const userData = { email: this.email, password: this.password };
+    const alumnoData = { 
+      matricula: this.matricula, 
+      rfid: this.rfid,
+      nombre: this.nombre, 
+      email: this.email,
+      password: this.password 
+    };
 
-    this.http.post('http://localhost:3000/api/register', userData).subscribe(
+    this.http.post('http://localhost:3000/api/register-alumno', alumnoData).subscribe(
       (response) => {
         alert('Usuario registrado exitosamente.');
         this.router.navigate(['/login']);
