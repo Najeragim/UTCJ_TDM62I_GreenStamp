@@ -10,9 +10,9 @@ import { HttpClient } from '@angular/common/http';
 export class AddTutorPage implements OnInit {
   matricula: String;
   nombre: String;
-  email: string;
-  password: string;
-  confirmPassword: string;
+  email: String;
+  password: String;
+  confirmPassword: String;
 
   constructor(private router: Router, private http: HttpClient) {
     // Inicializar las variables aquí si es necesario
@@ -39,7 +39,7 @@ export class AddTutorPage implements OnInit {
       matricula: this.matricula,
       nombre: this.nombre,
       email: this.email,
-      password: this.password 
+      password: this.password
     };
 
     this.http.post('http://localhost:3000/api/register-tutor', tutorData).subscribe(

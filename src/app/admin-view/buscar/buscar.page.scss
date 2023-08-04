@@ -2,75 +2,99 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-}
 
-#h1-title-search {
-    font-weight: bold;
-    font-size: 32px;
-    color: #1E2B00;
-    margin: 0.5em 0 0 0.5em;
-}
-
-ion-list {
-    ion-item {
-        border-radius: 50px;
-        background: #ffffff;
-        color: #1E2B00;
-        border: 1px solid rgba(0, 0, 0, 0.2);
+    #h1-title-search {
         font-weight: bold;
+        font-size: 32px;
+        color: #1E2B00;
+        margin: 0.5em 0 0 0.5em;
+    }
+
+    ion-list {
+        ion-item {
+            border-radius: 50px;
+            background: #ffffff;
+            color: #1E2B00;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+
+            &:hover {
+                border-color: #98B90A;
+            }
+        }
+
+    }
+
+    table {
+        margin-top: 2em;
+        text-align: center;
+        border-radius: 1em;
+        overflow: hidden;
         box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 
-        &:hover {
-            border-color: #98B90A;
+        thead {
+            background-color: #4A6F00;
+            color: #ffffff;
+        }
+
+        th,
+        td {
+            padding: 1em;
         }
     }
 
-}
-
-table {
-    margin-top: 2em;
-    text-align: center;
-    border-radius: 1em;
-    overflow: hidden;
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-
-    thead {
-        background-color: #4A6F00;
-        color: #ffffff;
+    .button-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: fit-content;
+        margin-top: 1em;
     }
 
-    th,
-    td {
-        padding: 1em;
+    #open-modal,
+    #btn-gen-doc {
+        width: 40%;
+        padding: 1.5em;
+        margin: auto;
+        box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+        border: 1px solid #eee;
+        border-radius: 2em;
+        font-weight: bold;
+        cursor: pointer;
     }
-}
 
-#btn-gen-doc {
-    width: 50%;
-    padding: 1.5em;
-    margin: auto;
-    margin-top: 2em;
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    background-color: #ffffff;
-    color: #4A6F00;
-    border: 1px solid #eee;
-    border-radius: 2em;
-    font-weight: bold;
-    cursor: pointer;
+    #open-modal {
+        background-color: #ffffff;
+        color: #4A6F00;
 
-    &:hover {
-        background-image: linear-gradient(to right top, #1e2b00, #233008, #29350f, #2f3b14, #35401a);
-        color: #fff;
+        &:hover {
+            background-image: linear-gradient(to right top, #1e2b00, #233008, #29350f, #2f3b14, #35401a);
+            color: #fff;
+        }
     }
-}
 
-ion-fab-button {
-    --background: #FFFFFF;
-    border-radius: 50%;
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    --color: #e02f36;
-    &:hover{
-        --background: #e02f36;
-        --color: #FFFFFF;
+    #btn-gen-doc {
+        background-color: #ffffff;
+        color: #4A6F00;
+
+        &:hover {
+            background-image: linear-gradient(to right top, #1e2b00, #233008, #29350f, #2f3b14, #35401a);
+            color: #fff;
+        }
     }
+
+    ion-fab-button {
+        --background: #FFFFFF;
+        border-radius: 50%;
+        box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+        --color: #e02f36;
+
+        &:hover {
+            --background: #e02f36;
+            --color: #FFFFFF;
+        }
+    }
+
+    
 }

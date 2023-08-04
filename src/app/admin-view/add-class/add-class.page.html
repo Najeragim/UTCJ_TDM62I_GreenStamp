@@ -1,0 +1,35 @@
+<ion-header collapse="fade" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      Nueva clase:
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="container">
+    <form #registerForm="ngForm">
+      <!-- Fecha y hora -->
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="time" color="secondary"></ion-icon>
+        <ion-input type="datetime-local" placeholder="Fecha y hora" color="primary" [(ngModel)]="fecha_hora"
+          name="fecha_hora"></ion-input>
+      </ion-item>
+      <!-- tutor matricula -->
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="person" color="secondary"></ion-icon>
+        <ion-input type="text" placeholder="Matrícula del tutor" color="primary" [(ngModel)]="tutor"
+          name="tutor"></ion-input>
+      </ion-item>
+      <!-- Materia -->
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="journal" color="secondary"></ion-icon>
+        <ion-input type="text" placeholder="Materia" color="primary" [(ngModel)]="materia" name="materia"></ion-input>
+      </ion-item>
+      <!-- Botón de registrar -->
+      <button (click)="register()" id="register-class-button">Registrar</button>
+      <!-- <ion-alert trigger="register-admin-button" header="¡Registro exitoso!" message="Se ha registrado el administrador correctamente"
+          [buttons]="['OK']"></ion-alert> -->
+    </form>
+  </div>
+</ion-content>

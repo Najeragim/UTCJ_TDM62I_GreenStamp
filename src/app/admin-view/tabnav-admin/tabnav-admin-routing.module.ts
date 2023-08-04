@@ -20,6 +20,10 @@ const routes: Routes = [
         path: 'add-tutor',
         loadChildren: () => import('./../../admin-view/add-tutor/add-tutor.module').then( m => m.AddTutorPageModule)
       },
+      {
+        path: 'add-class',
+        loadChildren: () => import('./../../admin-view/add-class/add-class.module').then( m => m.AddClassPageModule)
+      }
     ]
   }
 ];

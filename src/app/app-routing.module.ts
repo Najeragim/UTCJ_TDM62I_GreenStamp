@@ -51,8 +51,7 @@ const routes: Routes = [
   {
     path: 'clases',
     loadChildren: () => import('./tutor-view/clases/clases.module').then( m => m.ClasesPageModule)
-  }
-  
+  },
   
 ];
 

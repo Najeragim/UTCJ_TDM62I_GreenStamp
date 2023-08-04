@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const alumnoRoutes = require('./routes/alumnoRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const tutorRoutes = require('./routes/tutorRoutes');
+const claseRoutes = require('./routes/claseRoutes');
 
 const app = express();
 
@@ -31,10 +32,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors()); // Configura CORS como middleware global
 
-// Rutas
+// Rutass
 app.use('/api', alumnoRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', tutorRoutes);
+app.use('/api', claseRoutes);
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;

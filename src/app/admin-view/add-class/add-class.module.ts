@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BuscarPageRoutingModule } from './buscar-routing.module';
+import { AddClassPageRoutingModule } from './add-class-routing.module';
 
-import { BuscarPage } from './buscar.page';
+import { AddClassPage } from './add-class.page';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     IonicModule,
-    BuscarPageRoutingModule,
-    HttpClientModule
+    AddClassPageRoutingModule,
+    HttpClientModule, // Agregar el módulo HttpClientModule aquí
   ],
-  declarations: [BuscarPage]
+  declarations: [AddClassPage]
 })
-export class BuscarPageModule {}
+export class AddClassPageModule {}

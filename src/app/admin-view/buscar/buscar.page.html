@@ -1,3 +1,80 @@
+<style>
+  /* Estilos del modal */
+  ion-modal {
+    --background: #ffffff;
+    --border-radius: 2em;
+    --box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    --padding: 1em;
+  }
+
+  /* Estilos de la barra de título del modal */
+  ion-modal ion-header ion-toolbar {
+    --background: #4A6F00;
+    --color: #ffffff;
+  }
+
+  ion-modal ion-header ion-toolbar ion-title {
+    font-weight: bold;
+  }
+
+  ion-modal ion-header ion-toolbar ion-buttons[slot="start"] ion-button {
+    --color: #ffffff;
+    background-color: red;
+    margin-left: 1em;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  /* Estilos del contenido del modal */
+  ion-modal ion-content {
+    --background: #ffffff;
+    --color: #1E2B00;
+  }
+
+  /* Estilos de los elementos dentro del contenido del modal ion-modal ion-content ion-item */
+  ion-modal ion-content ion-item{
+    --color: #1E2B00;
+    --box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    --border: 1px solid rgbA(0, 0, 0, 0.1);
+    --border-radius: 30px;
+    --width: 100%;
+  }
+
+  ion-modal ion-content ion-item:hover {
+    --border-color: #98B90A;
+  }
+
+  /* Estilos de las etiquetas dentro del contenido del modal */
+  ion-modal ion-content ion-label {
+    --color: #1E2B00;
+  }
+
+  /* Estilos de los inputs dentro del contenido del modal */
+  ion-modal ion-content ion-input {
+    --color: #1E2B00;
+  }
+
+  /* Estilos del botón "Guardar" dentro del modal */
+  ion-modal ion-content .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1em;
+  }
+
+  ion-modal ion-content .guardar-button {
+    --background: #4A6F00;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 2em;
+    padding: 1em 2em;
+    background-image: linear-gradient(to right top, #1e2b00, #233008, #29350f, #2f3b14, #35401a);
+  }
+</style>
+
+
 <ion-content [fullscreen]="true">
   <div class="container ion-padding">
     <h1 id="h1-title-search">Busque sus listas</h1>
@@ -7,7 +84,7 @@
           <ion-icon name="log-out-outline"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-      
+
       <ion-list class="ion-padding custom-list">
         <ion-item>
           <ion-select aria-label="Materia" interface="popover" placeholder="Materia">
@@ -53,9 +130,37 @@
           </tr>
         </tbody>
       </table>
-      <button id="btn-gen-doc">Generar documento</button>
-      <ion-alert trigger="btn-gen-doc" header="¡Proceso exitoso!" message="Se ha generado su documento"
-        [buttons]="['OK']"></ion-alert>
+      <!-- Modal -->
+      <ion-modal id="addAlumnoModal" trigger="open-modal">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="cerrarModal()">
+                  <ion-icon name="close-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <ion-title>Agregar Alumno</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <ion-item>
+              <ion-input type="text" placeholder="Matrícula del alumno" [(ngModel)]="matricula"></ion-input>
+            </ion-item>
+            <!-- botón "Guardar" -->
+            <div class="modal-footer">
+              <button (click)="addAlumnoAClase()" class="guardar-button">Guardar</button>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
+
+      <!-- Botones -->
+      <div class="button-group">
+        <button id="open-modal">Agregar alumno</button>
+        <button id="btn-gen-doc">Generar documento</button>
+      </div>
     </div>
   </div>
 </ion-content>
