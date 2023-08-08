@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { IonModal } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-buscar',
@@ -14,15 +15,102 @@ export class BuscarPage implements OnInit {
 
   matricula: String;
   asistencia: String;
+  materias: string[] = [];
+  selectedMateria: string;
+  fechas: { formatted: string; raw: string; }[] = [];
+  selectedFechaFormatted: string;
+  selectedFechaRaw: string;
+  listaAlumnos: any[] = [];
 
-  constructor(private router: Router, private http: HttpClient){
+  constructor(
+    private router: Router, 
+    private http: HttpClient,
+    private loadingController: LoadingController
+  ){
     this.matricula = '';
     this.asistencia = 'pendiente';
+    this.selectedMateria = '';
+    this.selectedFechaFormatted = '';
+    this.selectedFechaRaw = '';
   }
 
   ngOnInit() {
+    this.fetchMaterias();
   }
 
+
+  //Funciones para el filtrado de materia y fechas
+
+  // Convertir a formato agradable a la vista
+  formatDateTime(dateTime: string): string {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+    
+    // Convierte la cadena de fecha en un objeto Date
+    const date = new Date(dateTime);
+    
+    // Formatea el objeto Date utilizando las opciones especificadas
+    return date.toLocaleDateString(undefined, options);
+  }
+
+  fetchMaterias() {
+    this.http.get<string[]>('http://localhost:3000/api/materias').subscribe(
+      (data) => {
+        this.materias = data;
+      },
+      (error) => {
+        console.error('Error fetching materias:', error);
+      }
+    );
+  }
+
+  async fetchFechas() {
+    if (this.selectedMateria) {
+      this.http.get<any[]>(`http://localhost:3000/api/materia/${this.selectedMateria}/fechas`).subscribe(
+        (data) => {
+          // Guarda ambos valores de fecha correctamente en la propiedad fechas
+          this.fechas = data.map((item) => {
+            const formattedDate = this.formatDateTime(item.fecha_hora);
+            return { formatted: formattedDate, raw: item.fecha_hora };
+          });
+        },
+        (error) => {
+          console.error('Error fetching fechas:', error);
+        }
+      );
+    }
+  }
+
+  async fetchAlumnos() {
+    if (this.selectedMateria && this.selectedFechaRaw) {
+      const loading = await this.loadingController.create({
+        message: 'Cargando...',
+      });
+      await loading.present();
+  
+      this.http
+        .get<any[]>(`http://localhost:3000/api/materia/${this.selectedMateria}/fecha/${this.selectedFechaRaw}/alumnos`)
+        .subscribe(
+          (data) => {
+            this.listaAlumnos = data;
+            loading.dismiss();
+          },
+          (error) => {
+            console.error('Error fetching alumnos:', error);
+            loading.dismiss();
+          }
+        );
+    }
+  }
+  
+
+
+  //Funciones para el modal
   cerrarModal() {
     this.modal.dismiss();
   }
@@ -31,13 +119,14 @@ export class BuscarPage implements OnInit {
     this.router.navigate(['/login'])
   }
 
+  //Función para agregar alumnos
   addAlumnoAClase() {
     const alumnoData = {
       matricula: this.matricula,
       asistencia: this.asistencia
     };
 
-    const claseId = '64cc3f464204e0e6952450e3'; // Reemplaza esto con el ID
+    const claseId = '64d1bb6ef5e97b0e43588e14'; // Reemplaza esto con el ID
 
     this.http.post(`http://localhost:3000/api/clase/${claseId}/alumnos`, alumnoData).subscribe(
       (response) => {

@@ -85,51 +85,39 @@
         </ion-fab-button>
       </ion-fab>
 
+      <!-- FILTROS -->
       <ion-list class="ion-padding custom-list">
         <ion-item>
-          <ion-select aria-label="Materia" interface="popover" placeholder="Materia">
-            <ion-select-option value="primera">Primera</ion-select-option>
-            <ion-select-option value="segunda">Segunda</ion-select-option>
-            <ion-select-option value="tercera">Tercera</ion-select-option>
+          <ion-select [(ngModel)]="selectedMateria" (ionChange)="fetchFechas()" aria-label="Materia" interface="popover" placeholder="Materia">
+            <ion-select-option *ngFor="let materia of materias" [value]="materia">{{ materia }}</ion-select-option>
           </ion-select>
         </ion-item>
         <br>
-        <ion-item>
-          <ion-select aria-label="Fecha" interface="popover" placeholder="Fecha">
-            <ion-select-option value="primera">06-07-2023</ion-select-option>
-            <ion-select-option value="segunda">07-07-2023</ion-select-option>
-            <ion-select-option value="tercera">08-07-2023</ion-select-option>
+        <ion-item *ngIf="selectedMateria">
+          <ion-select [(ngModel)]="selectedFechaRaw" (ionChange)="fetchAlumnos()" aria-label="Fecha" interface="popover" placeholder="Fecha">
+            <ion-select-option *ngFor="let fecha of fechas" [value]="fecha.raw">{{ fecha.formatted }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
-      <table>
+
+      <table *ngIf="selectedFechaRaw">
         <!-- Encabezado de la tabla -->
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre completo</th>
             <th>Asistencia</th>
           </tr>
         </thead>
         <!-- Filas de la tabla -->
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>César Castillo</td>
-            <td>Presente</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Gianluca Nájera</td>
-            <td>Ausente</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Edgar Sánchez</td>
-            <td>Tardío</td>
+          <tr *ngFor="let alumno of listaAlumnos">
+            <td>{{ alumno.matricula }}</td>
+            <td>{{ alumno.asistencia }}</td>
           </tr>
         </tbody>
       </table>
+
+
       <!-- Modal -->
       <ion-modal id="addAlumnoModal" trigger="open-modal">
         <ng-template>
