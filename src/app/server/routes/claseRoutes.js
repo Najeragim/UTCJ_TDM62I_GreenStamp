@@ -34,16 +34,17 @@ router.post('/register-clase', (req, res) => {
         });
 });
 
-// Ruta para agregar un alumno a una clase específica
-router.post('/clase/:id/alumnos', (req, res) => {
+// Ruta para agregar un alumno a una clase específica por su materia y fecha_hora
+router.post('/clase/:materia/fecha/:fecha/alumnos', (req, res) => {
     const { matricula, asistencia } = req.body;
-    const claseId = req.params.id;
+    const materia = req.params.materia;
+    const fecha_hora = req.params.fecha;
 
     if (!matricula || !asistencia) {
         return res.status(400).json({ message: 'Proporcione matricula del alumno' });
     }
 
-    Clase.findById(claseId)
+    Clase.findOne({ materia, fecha_hora })
         .then((clase) => {
             if (!clase) {
                 return res.status(404).json({ message: 'Clase no encontrada' });
