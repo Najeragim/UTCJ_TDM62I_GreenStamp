@@ -66,5 +66,21 @@ router.post('/clase/:id/alumnos', (req, res) => {
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 });
+router.get('/clase/:id/estado', (req, res) => {
+    const claseId = req.params.id;
 
+    Clase.findById(claseId)
+        .then((clase) => {
+            if (!clase) {
+                return res.status(404).json({ message: 'Clase no encontrada' });
+            }
+
+            res.status(200).json({ estado: clase.estado });
+        })
+        .catch((error) => {
+            console.error('Error al obtener el estado de la clase:', error);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+  
 module.exports = router;

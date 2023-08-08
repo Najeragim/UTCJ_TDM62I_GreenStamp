@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="container">
-    <form>
+    <form (ngSubmit)="login()">
       <h1 id="h1-welcome">
         <span>Hola,</span>
         <br>
@@ -8,19 +8,22 @@
         <br>
         <span>De vuelta</span>
       </h1>
+      <!-- Mostrar el mensaje de error en caso de que exista -->
+      <ion-label *ngIf="errorMessage" class="error-message">{{ errorMessage }}</ion-label>
+
       <ion-item lines="none" class="input-rounded ion-margin-bottom">
         <ion-icon slot="start" name="person" color="secondary"></ion-icon>
-        <ion-input type="text" placeholder="Correo" color="primary"></ion-input>
+        <ion-input type="text" placeholder="Correo" color="primary" [(ngModel)]="email" name="email"></ion-input>
       </ion-item>
       <ion-item lines="none" class="input-rounded">
         <ion-icon slot="start" name="key" color="secondary"></ion-icon>
-        <ion-input type="password" placeholder="Contraseña" color="primary"></ion-input>
+        <ion-input type="password" placeholder="Contraseña" color="primary" [(ngModel)]="password" name="password"></ion-input>
       </ion-item>
       <div class="form-links">
         <div id="link-forgot-container">
           <a (click)="goToForgotPassword()" id="forgot-password-link">¿Olvidaste tu contraseña?</a>
         </div>
-        <button id="login-button" (click)="goToTabnavAdmin()">Iniciar sesión</button>
+        <button id="login-button" type="submit">Iniciar sesión</button>
         <a (click)="goToRegister()" id="register-link">¿No tienes una cuenta? Regístrate</a>
       </div>
     </form>
