@@ -7,6 +7,10 @@ const adminRoutes = require('./routes/adminRoutes');
 const tutorRoutes = require('./routes/tutorRoutes');
 const claseRoutes = require('./routes/claseRoutes');
 
+const Admin = require('./models/admin');
+const Alumno = require('./models/alumno');
+const Tutor = require('./models/tutor');
+
 const app = express();
 
 // Conectar con MongoDB Atlas
@@ -32,7 +36,42 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors()); // Configura CORS como middleware global
 
-// Rutass
+// Ruta para autenticar al usuario
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Por favor, ingrese todos los campos requeridos' });
+  }
+
+  try {
+    // Buscar al usuario en las colecciones correspondientes según el tipo de usuario
+    const admin = await Admin.findOne({ email, password }).exec();
+    if (admin) {
+      return res.json({ userType: 'admin', userId: admin._id });
+    }
+
+    // Si no es un administrador, busca en la colección de alumnos
+    const alumno = await Alumno.findOne({ email, password }).exec();
+    if (alumno) {
+      return res.json({ userType: 'alumno', userId: alumno._id });
+    }
+
+    // Si no es un alumno, busca en la colección de tutores
+    const tutor = await Tutor.findOne({ email, password }).exec();
+    if (tutor) {
+      return res.json({ userType: 'tutor', userId: tutor._id });
+    }
+
+    // Si no se encuentra el usuario en ninguna colección, la autenticación falla
+    res.status(401).json({ message: 'Credenciales incorrectas' });
+  } catch (error) {
+    console.error('Error al buscar al usuario:', error);
+    res.status(500).json({ message: 'Error Interno del Servidor' });
+  }
+});
+
+// Rutas para las demás funcionalidades (registros, etc.)
 app.use('/api', alumnoRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', tutorRoutes);

@@ -67,21 +67,4 @@ router.post('/clase/:id/alumnos', (req, res) => {
         });
 });
 
-// Ruta para obtener detalles de una clase por su ID
-router.get('/clase/:id', (req, res) => {
-    const claseId = req.params.id;
-
-    Clase.findById(claseId)
-        .then((clase) => {
-            if (!clase) {
-                return res.status(404).json({ message: 'Clase no encontrada' });
-            }
-            res.status(200).json(clase);
-        })
-        .catch((error) => {
-            console.error('Error al obtener detalles de la clase:', error);
-            res.status(500).json({ message: 'Error Interno del Servidor' });
-        });
-});
-
 module.exports = router;
