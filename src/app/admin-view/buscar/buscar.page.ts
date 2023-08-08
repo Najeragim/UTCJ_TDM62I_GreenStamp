@@ -120,23 +120,31 @@ export class BuscarPage implements OnInit {
   }
 
   //Función para agregar alumnos
-  addAlumnoAClase() {
+  async addAlumnoAClase() {
     const alumnoData = {
       matricula: this.matricula,
-      asistencia: this.asistencia
+      asistencia: this.asistencia,
     };
 
-    const claseId = '64d1bb6ef5e97b0e43588e14'; // Reemplaza esto con el ID
+    if (!this.selectedMateria || !this.selectedFechaRaw) {
+      alert('Seleccione una materia y una fecha antes de agregar un alumno.');
+      return;
+    }
 
-    this.http.post(`http://localhost:3000/api/clase/${claseId}/alumnos`, alumnoData).subscribe(
-      (response) => {
-        alert('Alumno agregado exitosamente a la clase.');
-      },
-      (error) => {
-        alert('Error al agregar el alumno a la clase.');
-        console.error('Error:', error);
-      }
-    );
+    this.http
+      .post(
+        `http://localhost:3000/api/clase/${this.selectedMateria}/fecha/${this.selectedFechaRaw}/alumnos`,
+        alumnoData
+      )
+      .subscribe(
+        (response) => {
+          alert('Alumno agregado exitosamente a la clase.');
+        },
+        (error) => {
+          alert('Error al agregar el alumno a la clase.');
+          console.error('Error:', error);
+        }
+      );
 
     this.cerrarModal();
   }
