@@ -1,16 +1,38 @@
-<ion-header [translucent]="true">
- 
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">asis</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-fab slot="fixed" vertical="top" horizontal="end" >
+  <!-- Botón logout -->
+  <ion-fab slot="fixed" vertical="top" horizontal="end">
     <ion-fab-button (click)="goToLogin()">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <!-- Titulo -->
+  <h1 id="h1-title">Tus asistencias</h1>
+  <div class="divider"></div>
+
+  <div id="class-info" class="container">
+    <!-- Clase 1 -->
+    <div class="class">
+      <h1 class="fecha-hora">00:00:00</h1>
+      <h4>Aplicaciones Web</h4>
+      <h4>Ricarte Héctor</h4>
+      <p>Asistido</p>
+    </div>
+    <div class="divider"></div>
+    <!-- Clase 1 -->
+    <div class="class">
+      <h1 class="fecha-hora">00:00:00</h1>
+      <h4>Aplicaciones Web</h4>
+      <h4>Ricarte Héctor</h4>
+      <p>Faltado</p>
+    </div>
+    <div class="divider"></div>
+    <!-- Clase 1 -->
+    <div class="class">
+      <h1 class="fecha-hora">00:00:00</h1>
+      <h4>Aplicaciones Web</h4>
+      <h4>Ricarte Héctor</h4>
+      <p>Asistido</p>
+    </div>
+  </div>
 </ion-content>

@@ -9,67 +9,28 @@
   justify-content: center;
 }
 
-/* Estilos para el reloj */
-#clock {
-  margin-bottom: 20px;
-}
-
-.clock-digits {
-  font-size: 30px;
-  font-weight: bold;
-  text-align: left;
-}
-
-.digit {
-  padding: 0 10px;
-}
-
 /* Estilos para la información de la clase */
 #class-info {
   text-align: left;
-  margin-bottom: 20px;
-}
+  padding-top: 0px;
+  .class {
+    .fecha-hora {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: left;
+    }
 
-.class {
-  margin-bottom: 20px;
-}
+    h4 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
 
-.class h4 {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.class p {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.class h1 {
-  font-size: 24px;
-  margin-bottom: 5px;
-}
-
-#class-info input {
-  width: 100%;
-  padding: 5px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Estilos para el botón "Cerrar sesión" */
-#logout {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #555;
+    p {
+      color: #4A6F00;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
   }
 }
 
@@ -93,9 +54,16 @@ ion-fab-button {
   }
 }
 
-#h1-title-search {
+#h1-title {
   font-weight: bold;
   font-size: 32px;
   color: #1E2B00;
-  margin: 0.5em 0 0 0.5em;
+  margin: 0.5em auto 0.75em 0.5em;
+}
+
+.divider {
+  width: 90%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 10px auto;
 }

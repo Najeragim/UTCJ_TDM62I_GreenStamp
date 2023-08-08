@@ -1,60 +1,49 @@
-<ion-header [translucent]="true">
- 
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-list class="list-1">
-    <ion-item>
-      <ion-select aria-label="Materia" interface="popover" placeholder="Materia">
-        <ion-select-option value="matematicas">matematicas</ion-select-option>
-        <ion-select-option value="historia">historia</ion-select-option>
-        <ion-select-option value="ciencias">ciencias</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item class="list-2">
-      <ion-select aria-label="Fecha" interface="popover" placeholder="Fecha">
-        <ion-select-option value="primera">06-07-2023</ion-select-option>
-        <ion-select-option value="segunda">07-07-2023</ion-select-option>
-        <ion-select-option value="tercera">08-07-2023</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <table>
-    <!-- Encabezado de la tabla -->
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre completo</th>
-        <th>Asistencia</th>
-      </tr>
-    </thead>
-    <!-- Filas de la tabla -->
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>César Castillo</td>
-        <td>Presente</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Gianluca Nájera</td>
-        <td>Ausente</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Edgar Sánchez</td>
-        <td>Tardío</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="boton2"><button id="btn-gen-doc">Generar documento</button></div>
-  <ion-alert trigger="btn-gen-doc" header="¡Proceso exitoso!" message="Se ha generado su documento"
-    [buttons]="['OK']"></ion-alert>
-  
-  
-    <ion-fab slot="fixed" vertical="top" horizontal="end" >
-      <ion-fab-button (click)="goToLogin()">
-        <ion-icon name="log-out-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+  <div class="container ion-padding">
+    <h1 id="h1-title">Busque sus listas</h1>
+    <div class="container">
+      <ion-fab slot="fixed" vertical="top" horizontal="end">
+        <ion-fab-button (click)="goToLogin()">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-list>
+        <ion-item>
+          <ion-select aria-label="Materia" interface="popover" placeholder="Materia">
+            <ion-select-option value="matematicas">matematicas</ion-select-option>
+            <ion-select-option value="historia">historia</ion-select-option>
+            <ion-select-option value="ciencias">ciencias</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-select aria-label="Fecha" interface="popover" placeholder="Fecha">
+            <ion-select-option value="primera">06-07-2023</ion-select-option>
+            <ion-select-option value="segunda">07-07-2023</ion-select-option>
+            <ion-select-option value="tercera">08-07-2023</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <table *ngIf="clase"> <!-- Verifica si clase está definido -->
+        <!-- Encabezado de la tabla -->
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Asistencia</th>
+          </tr>
+        </thead>
+        <!-- Filas de la tabla -->
+        <tbody>
+          <tr *ngFor="let alumno of clase.alumnos">
+            <td>{{ alumno.matricula }}</td>
+            <td>{{ alumno.asistencia }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="btn-gen-doc">Generar documento</button>
+      <ion-alert trigger="btn-gen-doc" header="¡Proceso exitoso!" message="Se ha generado su documento"
+        [buttons]="['OK']"></ion-alert>
+    </div>
+  </div>
+
 </ion-content>

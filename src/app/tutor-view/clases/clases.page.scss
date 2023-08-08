@@ -1,102 +1,115 @@
 /* Estilos generales */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-  }
-  
-  /* Estilos para el reloj */
-  #clock {
-    margin-bottom: 20px;
-  }
-  
-  .clock-digits {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: left;
-  }
-  
-  .digit {
-    padding: 0 10px;
-  }
-  
-  /* Estilos para la información de la clase */
-  #class-info {
-    text-align: left;
-    margin-bottom: 20px;
-  }
-  
+  margin: 0 auto;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Estilos para la información de la clase */
+#class-info {
+  text-align: left;
+  padding-top: 0px;
   .class {
-    margin-bottom: 20px;
-  }
-  
-  .class h4 {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  .class p {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
-  .class h1 {
-    font-size: 24px;
-    margin-bottom: 5px;
-  }
-  
-  #class-info input {
-    width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* Estilos para el botón "Cerrar sesión" */
-  #logout {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      background-color: #555;
+    .fecha-hora {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    h4 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      color: #4A6F00;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 5px;
     }
   }
-  
-  /* Estilos para el botón de log-out */
-  ion-fab-button {
-    --background: #FFFFFF;
-    border-radius: 50%;
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    --color: #e02f36;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      --background: #e02f36;
-      --color: #FFFFFF;
-    }
+}
+
+/* Estilos para el botón de log-out */
+ion-fab-button {
+  --background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  --color: #e02f36;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    --background: #e02f36;
+    --color: #FFFFFF;
   }
-  
-  #h1-title-search {
-    font-weight: bold;
-    font-size: 32px;
+}
+
+/* Estilos de la lista desplegable*/
+ion-list {
+  ion-item {
+    border-radius: 50px;
+    background: #ffffff;
     color: #1E2B00;
-    margin: 0.5em 0 0 0.5em;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+
+    &:hover {
+      border-color: #98B90A;
+    }
   }
-  
+
+}
+
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: fit-content;
+
+  #btn-finalizar,
+  #btn-iniciar {
+    width: 40%;
+    padding: 1.25em;
+    margin: auto;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    border: 1px solid #eee;
+    border-radius: 2em;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  #btn-finalizar {
+    background-color: red;
+    color: #FFFFFF;
+  }
+
+  #btn-iniciar {
+    background-color: #4A6F00;
+    color: #FFFFFF;
+  }
+
+}
+
+h2 {
+  margin-top: 1em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.divider {
+  width: 90%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 10px auto;
+}

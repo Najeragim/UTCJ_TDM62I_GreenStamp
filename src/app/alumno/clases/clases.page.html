@@ -1,34 +1,39 @@
 <ion-content>
-  <h1 id="h1-title-search">Hora</h1>
-  <div id="clock" class="container">
-    <h1 class="clock-digits">00:00:00</h1>
-  </div>
-  <div id="class-info" class="container">
-    <div class="class">
-      <h4>Aplicaciones Web</h4>
-      <p>Ricardo Emilio</p>
-      <h1>H005</h1>
-    </div>
-    <div id="clock" class="container">
-      <h1 class="clock-digits">00:00:00</h1>
-    </div>
-    <div class="class">
-      <h4>Inteligencia Artificial</h4>
-      <p>Juan Carlos</p>
-      <h1>H101</h1>
-    </div>
-    <div id="clock" class="container">
-      <h1 class="clock-digits">00:00:00</h1>
-    </div>
-    <div class="class">
-      <h4>Bases de Datos</h4>
-      <p>Maria Rodríguez</p>
-      <h1>H205</h1>
-    </div>
-  </div>
+  <!-- Botón logout -->
   <ion-fab slot="fixed" vertical="top" horizontal="end" >
     <ion-fab-button (click)="goToLogin()">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <!-- Titulo -->
+  <h1 id="h1-title">Tus clases</h1>
+
+  <div class="divider"></div>
+
+  <div id="class-info" class="container">
+    <!-- Clase 1 -->
+    <div class="class">
+      <h1 class="fecha-hora">00:00:00</h1>
+      <h4>Aplicaciones Web</h4>
+      <h4>Ricarte Héctor</h4>
+      <p>H005</p>
+    </div>
+    <div class="divider"></div>
+    <!-- Clase 1 -->
+    <div class="class">
+      <h1 class="fecha-hora">00:00:00</h1>
+      <h4>Aplicaciones Web</h4>
+      <h4>Ricarte Héctor</h4>
+      <p>H005</p>
+    </div>
+    <div class="divider"></div>
+    <!-- Clase 1 -->
+    <div class="class">
+      <h1 class="fecha-hora">00:00:00</h1>
+      <h4>Aplicaciones Web</h4>
+      <h4>Ricarte Héctor</h4>
+      <p>H005</p>
+    </div>
+  </div>
+  
 </ion-content>

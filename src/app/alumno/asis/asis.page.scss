@@ -1,0 +1,70 @@
+/* Estilos para el botón de log-out */
+ion-fab-button {
+    --background: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    --color: #e02f36;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        --background: #e02f36;
+        --color: #FFFFFF;
+    }
+}
+
+#h1-title {
+    font-weight: bold;
+    font-size: 32px;
+    color: #1E2B00;
+    margin: 0.5em auto 0.75em 0.5em;
+}
+
+.divider {
+    width: 90%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px auto;
+}
+
+/* Estilos generales */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Estilos para la información de la clase */
+#class-info {
+    text-align: left;
+    padding-top: 0px;
+
+    .class {
+        .fecha-hora {
+            font-size: 30px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            color: #4A6F00;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    }
+}
