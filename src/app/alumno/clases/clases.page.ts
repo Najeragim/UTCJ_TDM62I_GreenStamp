@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http'; // Importa HttpClient
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-clases',
@@ -8,27 +8,50 @@ import { HttpClient } from '@angular/common/http'; // Importa HttpClient
   styleUrls: ['./clases.page.scss'],
 })
 export class ClasesPage implements OnInit {
-  constructor(private router: Router, private http: HttpClient) {}
+  
+  alumnoMatr: string;
+  clases: { fecha_hora: string; materia: string; profesor: string; salon: string }[] = [];
 
-  ngOnInit() {}
+  constructor(private router: Router, private http: HttpClient) {
+    this.alumnoMatr = '';
+  }
+
+  ngOnInit() {
+    // Ejemplo: Asigna la matrícula del alumno al iniciar sesión
+    this.alumnoMatr = '21311212';
+    this.fetchClasesPendientes();
+  }
 
   goToLogin() {
+    this.alumnoMatr = '';
     this.router.navigate(['/login']);
   }
 
-  obtenerEstadoClase(claseId: string) {
-    this.http
-      .get<any>(`/api/clase/${claseId}/estado`) // Cambia la ruta según tu configuración
-      .subscribe(
-        (response) => {
-          const estado = response.estado;
-          console.log(`El estado de la clase es: ${estado}`);
-          // Aquí puedes manejar el estado como desees, por ejemplo, mostrándolo en el HTML
+  fetchClasesPendientes() {
+    if (this.alumnoMatr) {
+      this.http.get<any[]>(`http://localhost:3000/api/alumno/${this.alumnoMatr}/clases/pendientes`).subscribe(
+        (data) => {
+          this.clases = data.map((item) => {
+            const formattedDate = this.formatDateTime(item.fecha_hora);
+            return { fecha_hora: formattedDate, materia: item.materia, profesor: item.tutor, salon: item.salon };
+          });
         },
         (error) => {
-          console.error('Error al obtener el estado de la clase:', error);
-          // Manejo del error
+          console.error('Error fetching pendiente clases:', error);
         }
       );
+    }
+  }
+
+  formatDateTime(dateTime: string): string {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+    const date = new Date(dateTime);
+    return date.toLocaleDateString(undefined, options);
   }
 }

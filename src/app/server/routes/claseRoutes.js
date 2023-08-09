@@ -196,4 +196,34 @@ router.get('/tutor/:matricula/clases/pendientes', (req, res) => {
         });
 });
 
+//-------------------------------------------------------------------------------------------------------------
+// Ruta para obtener las clases pendientes de un alumno específico
+router.get('/alumno/:matricula/clases/pendientes', (req, res) => {
+    const alumnoMatricula = req.params.matricula;
+
+    Clase.find({ 'alumnos.matricula': alumnoMatricula, estado: 'pendiente' })
+        .then((clases) => {
+            res.status(200).json(clases);
+        })
+        .catch((err) => {
+            console.error('Error al obtener las clases pendientes del alumno:', err);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+
+// Ruta para obtener las clases en curso o terminadas con asistencias de un alumno específico
+router.get('/alumno/:matricula/clases/asistencias', (req, res) => {
+    const alumnoMatricula = req.params.matricula;
+
+    Clase.find({ 'alumnos.matricula': alumnoMatricula, estado: { $in: ['en curso', 'terminada'] } })
+        .then((clases) => {
+            res.status(200).json(clases);
+        })
+        .catch((err) => {
+            console.error('Error al obtener las clases con asistencias del alumno:', err);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+
+
 module.exports = router;

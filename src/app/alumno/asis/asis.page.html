@@ -11,28 +11,22 @@
   <div class="divider"></div>
 
   <div id="class-info" class="container">
-    <!-- Clase 1 -->
-    <div class="class">
-      <h1 class="fecha-hora">00:00:00</h1>
-      <h4>Aplicaciones Web</h4>
-      <h4>Ricarte Héctor</h4>
-      <p>Asistido</p>
-    </div>
-    <div class="divider"></div>
-    <!-- Clase 1 -->
-    <div class="class">
-      <h1 class="fecha-hora">00:00:00</h1>
-      <h4>Aplicaciones Web</h4>
-      <h4>Ricarte Héctor</h4>
-      <p>Faltado</p>
-    </div>
-    <div class="divider"></div>
-    <!-- Clase 1 -->
-    <div class="class">
-      <h1 class="fecha-hora">00:00:00</h1>
-      <h4>Aplicaciones Web</h4>
-      <h4>Ricarte Héctor</h4>
-      <p>Asistido</p>
-    </div>
+    <!-- Iterar a través de las asistencias y mostrar los valores -->
+    <ng-container *ngFor="let clase of clases">
+      <div class="class">
+        <h1 class="fecha-hora">{{ clase.fecha_hora }}</h1>
+        <h4>{{ clase.materia }}</h4>
+        <h4>Profesor: {{ clase.profesor }}</h4>
+        <div *ngFor="let alumno of clase.alumnos">
+          <!-- Mostrar solo si la matrícula del alumno coincide -->
+          <ng-container *ngIf="alumno.matricula === alumnoMatr">
+            <p>{{ alumno.asistencia }}</p>
+          </ng-container>
+        </div>
+      </div>
+      <div class="divider"></div>
+    </ng-container>
+    
+      
   </div>
 </ion-content>
