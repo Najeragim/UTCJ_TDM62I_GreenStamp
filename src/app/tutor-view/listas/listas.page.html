@@ -9,18 +9,14 @@
       </ion-fab>
       <ion-list>
         <ion-item>
-          <ion-select aria-label="Materia" interface="popover" placeholder="Materia">
-            <ion-select-option value="matematicas">matematicas</ion-select-option>
-            <ion-select-option value="historia">historia</ion-select-option>
-            <ion-select-option value="ciencias">ciencias</ion-select-option>
+          <ion-select [(ngModel)]="selectedMateria" (ionChange)="fetchFechas()" aria-label="Materia" interface="popover" placeholder="Materia">
+            <ion-select-option *ngFor="let materia of materias" [value]="materia">{{ materia }}</ion-select-option>
           </ion-select>
         </ion-item>
         <br>
-        <ion-item>
-          <ion-select aria-label="Fecha" interface="popover" placeholder="Fecha">
-            <ion-select-option value="primera">06-07-2023</ion-select-option>
-            <ion-select-option value="segunda">07-07-2023</ion-select-option>
-            <ion-select-option value="tercera">08-07-2023</ion-select-option>
+        <ion-item *ngIf="selectedMateria">
+          <ion-select [(ngModel)]="selectedFechaRaw" (ionChange)="fetchClase()" aria-label="Fecha" interface="popover" placeholder="Fecha">
+            <ion-select-option *ngFor="let fecha of fechas" [value]="fecha.raw">{{ fecha.formatted }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>

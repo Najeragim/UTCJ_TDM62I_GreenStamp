@@ -13,6 +13,7 @@ export class AddClassPage implements OnInit {
   materia: String;
   alumnos: Array<Object>;
   estado: String;
+  salon: String;
 
   constructor(private router: Router, private http: HttpClient) {
     this.fecha_hora = '';
@@ -20,6 +21,7 @@ export class AddClassPage implements OnInit {
     this.materia = '';
     this.alumnos = [];
     this.estado = 'pendiente';
+    this.salon = '';
   }
 
   ngOnInit() { }
@@ -30,7 +32,8 @@ export class AddClassPage implements OnInit {
       tutor: this.tutor,
       materia: this.materia,
       alumnos: this.alumnos,
-      estado: this.estado
+      estado: this.estado,
+      salon: this.salon
     };
 
     this.http.post('http://localhost:3000/api/register-clase', claseData).subscribe(

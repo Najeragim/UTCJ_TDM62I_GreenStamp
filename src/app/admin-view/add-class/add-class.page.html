@@ -26,6 +26,11 @@
         <ion-icon slot="start" name="journal" color="secondary"></ion-icon>
         <ion-input type="text" placeholder="Materia" color="primary" [(ngModel)]="materia" name="materia"></ion-input>
       </ion-item>
+      <!-- Salón -->
+      <ion-item lines="none" class="input-rounded ion-margin-bottom">
+        <ion-icon slot="start" name="location-sharp" color="secondary"></ion-icon>
+        <ion-input type="text" placeholder="Salón" color="primary" [(ngModel)]="salon" name="salon"></ion-input>
+      </ion-item>
       <!-- Botón de registrar -->
       <button (click)="register()" id="register-class-button">Registrar</button>
       <!-- <ion-alert trigger="register-admin-button" header="¡Registro exitoso!" message="Se ha registrado el administrador correctamente"

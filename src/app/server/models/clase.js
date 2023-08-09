@@ -9,6 +9,7 @@ const claseSchema = new mongoose.Schema({
     asistencia: { type: String, required: true }
   }],
   estado: { type: String, required: true },
+  salon: { type: String, required: true },
 });
 
 const Clase = mongoose.model('Clase', claseSchema);

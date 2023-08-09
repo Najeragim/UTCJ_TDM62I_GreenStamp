@@ -1,19 +1,19 @@
 <ion-content>
-  <ion-fab slot="fixed" vertical="top" horizontal="end" >
+  <ion-fab slot="fixed" vertical="top" horizontal="end">
     <ion-fab-button (click)="goToLogin()">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  
+
   <!-- Iniciar una Clase -->
   <h2>Inicia una clase</h2>
   <!-- Selección de clase -->
   <ion-list class="ion-padding custom-list">
     <ion-item>
-      <ion-select aria-label="Fecha" interface="popover" placeholder="Fecha y hora">
-        <ion-select-option value="primera">06-07-2023</ion-select-option>
-        <ion-select-option value="segunda">07-07-2023</ion-select-option>
-        <ion-select-option value="tercera">08-07-2023</ion-select-option>
+      <ion-select [(ngModel)]="selectedClase" (ionChange)="fetchClases()" aria-label="Fecha" interface="popover"
+        placeholder="Fecha y hora">
+        <ion-select-option *ngFor="let clase of clases" [value]="clase.fecha_hora">{{ clase.formatted
+          }}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
@@ -25,28 +25,14 @@
   </div>
 
   <div class="divider"></div>
-  
+
   <!-- Info de Clases -->
   <div id="class-info" class="container">
-    <!-- Clase 1 -->
-    <div class="class">
-      <h1 class="fecha-hora">00:00:00</h1>
-      <h4>Aplicaciones Web</h4>
-      <p>H005</p>
-    </div>
-    <div class="divider"></div>
-    <!-- Clase 1 -->
-    <div class="class">
-      <h1 class="fecha-hora">00:00:00</h1>
-      <h4>Aplicaciones Web</h4>
-      <p>H005</p>
-    </div>
-    <div class="divider"></div>
-    <!-- Clase 1 -->
-    <div class="class">
-      <h1 class="fecha-hora">00:00:00</h1>
-      <h4>Aplicaciones Web</h4>
-      <p>H005</p>
+    <div *ngFor="let clase of clases" class="class">
+      <h1 class="fecha-hora">{{ clase.formatted }}</h1>
+      <h4>{{ clase.materia }}</h4>
+      <p>{{ clase.salon }}</p>
+      <br><br>
     </div>
   </div>
 </ion-content>

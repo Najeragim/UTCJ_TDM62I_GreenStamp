@@ -10,9 +10,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 // Ruta de registro de clase
 router.post('/register-clase', (req, res) => {
-    const { fecha_hora, tutor, materia, alumnos, estado } = req.body;
+    const { fecha_hora, tutor, materia, alumnos, estado, salon } = req.body;
 
-    if (!fecha_hora || !tutor || !materia || !alumnos || !estado) {
+    if (!fecha_hora || !tutor || !materia || !alumnos || !estado || !salon) {
         return res.status(400).json({ message: 'Proporcione todos los datos' });
     }
 
@@ -21,7 +21,8 @@ router.post('/register-clase', (req, res) => {
         tutor,
         materia,
         alumnos,
-        estado
+        estado,
+        salon
     });
 
     newClase.save()
@@ -131,5 +132,68 @@ router.get('/materia/:nombre/fecha/:fecha/alumnos', (req, res) => {
         });
 });
 
+//--------------------------------------------------------------------------------------------------
+// Ruta para obtener las materias asociadas a un tutor específico
+router.get('/tutor/:matricula/materias', (req, res) => {
+    const tutorMatricula = req.params.matricula;
+
+    Clase.distinct('materia', { tutor: tutorMatricula })
+        .then((materias) => {
+            res.status(200).json(materias);
+        })
+        .catch((err) => {
+            console.error('Error al obtener las materias del tutor:', err);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+
+// Ruta para obtener las fechas asociadas a una materia y un tutor específico
+router.get('/tutor/:matricula/materia/:materia/fechas', (req, res) => {
+    const tutorMatricula = req.params.matricula;
+    const materia = req.params.materia;
+
+    Clase.find({ tutor: tutorMatricula, materia }, 'fecha_hora')
+        .then((fechas) => {
+            res.status(200).json(fechas);
+        })
+        .catch((err) => {
+            console.error('Error al obtener las fechas del tutor y materia:', err);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+
+// Ruta para obtener los detalles de una clase específica para un tutor, materia y fecha específicos
+router.get('/tutor/:matricula/materia/:materia/fecha/:fecha', (req, res) => {
+    const tutorMatricula = req.params.matricula;
+    const materia = req.params.materia;
+    const fecha_hora = req.params.fecha;
+
+    Clase.findOne({ tutor: tutorMatricula, materia, fecha_hora })
+        .then((clase) => {
+            if (!clase) {
+                res.status(404).json({ message: 'Clase no encontrada' });
+            } else {
+                res.status(200).json(clase);
+            }
+        })
+        .catch((err) => {
+            console.error('Error al obtener los detalles de la clase del tutor:', err);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+
+// Ruta para obtener las clases pendientes de un tutor específico
+router.get('/tutor/:matricula/clases/pendientes', (req, res) => {
+    const tutorMatricula = req.params.matricula;
+
+    Clase.find({ tutor: tutorMatricula, estado: 'pendiente' })
+        .then((clases) => {
+            res.status(200).json(clases);
+        })
+        .catch((err) => {
+            console.error('Error al obtener las clases pendientes del tutor:', err);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
 
 module.exports = router;
