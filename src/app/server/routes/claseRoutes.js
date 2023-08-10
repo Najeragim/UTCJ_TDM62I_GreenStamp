@@ -225,5 +225,23 @@ router.get('/alumno/:matricula/clases/asistencias', (req, res) => {
         });
 });
 
+// Ruta para cambiar el estado de una clase a "activa"
+router.put('/clase/:materia/fecha/:fecha/estado', (req, res) => {
+    const materia = req.params.materia;
+    const fecha_hora = req.params.fecha;
+
+    Clase.findOneAndUpdate({ materia, fecha_hora }, { estado: 'activa' }, { new: true })
+        .then((clase) => {
+            if (!clase) {
+                return res.status(404).json({ message: 'Clase no encontrada' });
+            }
+            res.status(200).json({ message: 'Estado de la clase cambiado a "activa"' });
+        })
+        .catch((error) => {
+            console.error('Error al cambiar el estado de la clase:', error);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+
 
 module.exports = router;
