@@ -20,7 +20,7 @@
 
   <!-- Botones -->
   <div class="button-group">
-    <button id="btn-finalizar">Finalizar</button>
+   <button id="btn-finalizar" (click)="finalizarClase()">Finalizar</button>
      <button id="btn-iniciar" (click)="iniciarClase()">Iniciar</button>
   </div>
 
@@ -32,7 +32,9 @@
       <h1 class="fecha-hora">{{ clase.formatted }}</h1>
       <h4>{{ clase.materia }}</h4>
       <p>{{ clase.salon }}</p>
+      <p>Estado: {{ clase.estado }}</p>
       <div class="divider"></div>
     </div>
   </div>
+  
 </ion-content>

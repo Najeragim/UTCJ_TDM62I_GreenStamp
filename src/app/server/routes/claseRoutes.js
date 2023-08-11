@@ -182,19 +182,20 @@ router.get('/tutor/:matricula/materia/:materia/fecha/:fecha', (req, res) => {
         });
 });
 
-// Ruta para obtener las clases pendientes de un tutor específico
-router.get('/tutor/:matricula/clases/pendientes', (req, res) => {
+// Ruta para obtener todas las clases (pendientes y activas) de un tutor específico
+router.get('/tutor/:matricula/clases', (req, res) => {
     const tutorMatricula = req.params.matricula;
 
-    Clase.find({ tutor: tutorMatricula, estado: 'pendiente' })
+    Clase.find({ tutor: tutorMatricula, estado: { $in: ['pendiente', 'activa'] } })
         .then((clases) => {
             res.status(200).json(clases);
         })
         .catch((err) => {
-            console.error('Error al obtener las clases pendientes del tutor:', err);
+            console.error('Error al obtener las clases del tutor:', err);
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 });
+
 
 //-------------------------------------------------------------------------------------------------------------
 // Ruta para obtener las clases pendientes de un alumno específico
@@ -223,7 +224,8 @@ router.get('/alumno/:matricula/clases/asistencias', (req, res) => {
             console.error('Error al obtener las clases con asistencias del alumno:', err);
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
-});
+
+    });
 
 // Ruta para cambiar el estado de una clase a "activa"
 router.put('/clase/:materia/fecha/:fecha/estado', (req, res) => {
@@ -242,6 +244,41 @@ router.put('/clase/:materia/fecha/:fecha/estado', (req, res) => {
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 });
+// Ruta para cambiar el estado de una clase a "finalizado" si está en estado "activa"
+router.put('/clase/:materia/fecha/:fecha/finalizar', (req, res) => {
+    const materia = req.params.materia;
+    const fecha_hora = req.params.fecha;
+
+    Clase.findOne({ materia, fecha_hora })
+        .then((clase) => {
+            if (!clase) {
+                return res.status(404).json({ message: 'Clase no encontrada' });
+            }
+
+            if (clase.estado !== 'activa') {
+                return res.status(400).json({ message: 'El estado actual de la clase no es "activa"' });
+            }
+
+            // Cambiar el estado a "finalizado" solo si el estado actual es "activa"
+            clase.estado = 'finalizado';
+
+            // Cambiar el estado de los alumnos a "falta"
+            clase.alumnos.forEach((alumno) => {
+                alumno.asistencia = 'falta';
+            });
+
+            return clase.save();
+        })
+        .then(() => {
+            res.status(200).json({ message: 'Estado de la clase cambiado a "finalizado", alumnos marcados como "falta"' });
+        })
+        .catch((error) => {
+            console.error('Error al cambiar el estado de la clase:', error);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+
+
 
 
 module.exports = router;

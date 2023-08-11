@@ -27,21 +27,23 @@ export class ClasesPage implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  fetchClases() {
-    if (this.tutorMatr) {
-      this.http.get<any[]>(`http://localhost:3000/api/tutor/${this.tutorMatr}/clases/pendientes`).subscribe(
-        (data) => {
-          this.clases = data.map((item) => {
-            const formattedDate = this.formatDateTime(item.fecha_hora);
-            return { formatted: formattedDate, fecha_hora: item.fecha_hora, materia: item.materia, salon: item.salon, estado: item.estado };
-          });
-        },
-        (error) => {
-          console.error('Error fetching clases:', error);
-        }
+ // Reemplaza la función fetchClases() actual en clases.page.ts
+fetchClases() {
+  if (this.tutorMatr) {
+      this.http.get<any[]>(`http://localhost:3000/api/tutor/${this.tutorMatr}/clases`).subscribe(
+          (data) => {
+              this.clases = data.map((item) => {
+                  const formattedDate = this.formatDateTime(item.fecha_hora);
+                  return { formatted: formattedDate, fecha_hora: item.fecha_hora, materia: item.materia, salon: item.salon, estado: item.estado };
+              });
+          },
+          (error) => {
+              console.error('Error al obtener las clases:', error);
+          }
       );
-    }
   }
+}
+
 
   formatDateTime(dateTime: string): string {
     const options: Intl.DateTimeFormatOptions = {
@@ -54,6 +56,7 @@ export class ClasesPage implements OnInit {
     const date = new Date(dateTime);
     return date.toLocaleDateString(undefined, options);
   }
+  
 
   iniciarClase() {
     if (!this.selectedClase) {
@@ -80,5 +83,36 @@ export class ClasesPage implements OnInit {
           console.error('Error al activar la clase:', error);
         }
       );
+     
+      
   }
+  
+  
+  finalizarClase() {
+    if (!this.selectedClase) {
+        console.error('Selecciona una clase antes de finalizar.');
+        return;
+    }
+
+    const selectedClass = this.clases.find(c => c.fecha_hora === this.selectedClase);
+
+    if (!selectedClass) {
+        console.error('No se encontró la clase seleccionada en la lista.');
+        return;
+    }
+
+    // Cambia el estado de la clase actual a "finalizado"
+    this.http.put(`http://localhost:3000/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/finalizar`, {})
+        .subscribe(
+            () => {
+                console.log('Clase finalizada exitosamente. Alumnos marcados como "falta".');
+                this.fetchClases();
+            },
+            (error) => {
+                console.error('Error al finalizar la clase:', error);
+            }
+        );
+}
+
+  
 }  
