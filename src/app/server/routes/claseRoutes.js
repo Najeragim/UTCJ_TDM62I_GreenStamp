@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Clase = require('../models/clase');
-
+const globalVariables = require('../globalVariables');
 const router = express.Router();
 
 // Middlewares
@@ -225,7 +225,7 @@ router.get('/alumno/:matricula/clases/asistencias', (req, res) => {
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 
-    });
+});
 
 // Ruta para cambiar el estado de una clase a "activa"
 router.put('/clase/:materia/fecha/:fecha/estado', (req, res) => {
@@ -278,7 +278,52 @@ router.put('/clase/:materia/fecha/:fecha/finalizar', (req, res) => {
         });
 });
 
+// Ruta para obtener el ID de una clase específica por materia y fecha_hora
+router.get('/clase/:materia/fecha/:fecha/id', (req, res) => {
+    const materia = req.params.materia;
+    const fecha_hora = req.params.fecha;
 
+    Clase.findOne({ materia, fecha_hora }, '_id')
+        .then((clase) => {
+            if (!clase) {
+                return res.status(404).json({ message: 'Clase no encontrada' });
+            }
+            res.status(200).json({ _id: clase._id });
+        })
+        .catch((error) => {
+            console.error('Error al obtener el ID de la clase:', error);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
 
+// Agrega esta ruta al archivo de claseRoutes.js
+router.post('/update-clase-id', (req, res) => {
+    const { selectedClaseId } = req.body;
+    globalVariables.setSelectedClaseId(selectedClaseId); // Almacena el ID en la variable global
+    res.status(200).json({ message: 'ID de clase actualizado correctamente.' });
+});
+
+// Agrega esta ruta al archivo de claseRoutes.js
+router.get('/get-clase-id', (req, res) => {
+    const selectedClaseId = globalVariables.getSelectedClaseId();
+    res.status(200).json({ selectedClaseId });
+});
+
+// Ruta para obtener el estado de una clase por su ID
+router.get('/get-clase-estado/:id', (req, res) => {
+    const claseId = req.params.id;
+
+    Clase.findById(claseId, 'estado')
+        .then((clase) => {
+            if (!clase) {
+                return res.status(404).json({ message: 'Clase no encontrada' });
+            }
+            res.status(200).json({ estadoClase: clase.estado });
+        })
+        .catch((error) => {
+            console.error('Error al obtener el estado de la clase:', error);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
 
 module.exports = router;
