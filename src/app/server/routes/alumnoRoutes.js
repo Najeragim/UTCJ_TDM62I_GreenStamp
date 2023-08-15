@@ -27,4 +27,26 @@ router.post('/register-alumno', (req, res) => {
       res.status(500).json({ message: 'Error Interno del Servidor' });
     });
 });
+
+router.post('/find-alumno', (req, res) => {
+  const { rfid } = req.body;
+
+  if (!rfid) {
+      return res.status(400).json({ message: 'Proporcione el UID del RFID' });
+  }
+
+  Alumno.findOne({ rfid })
+      .then((alumno) => {
+          if (!alumno) {
+              return res.status(404).json({ message: 'Alumno no encontrado' });
+          }
+          res.status(200).json({ matricula: alumno.matricula });
+      })
+      .catch((error) => {
+          console.error('Error al buscar la matrícula del alumno:', error);
+          res.status(500).json({ message: 'Error Interno del Servidor' });
+      });
+});
+
+
 module.exports = router;

@@ -262,9 +262,11 @@ router.put('/clase/:materia/fecha/:fecha/finalizar', (req, res) => {
             // Cambiar el estado a "finalizado" solo si el estado actual es "activa"
             clase.estado = 'finalizado';
 
-            // Cambiar el estado de los alumnos a "falta"
+            // Cambiar el estado de los alumnos a "falta" solo si su estado actual es "pendiente"
             clase.alumnos.forEach((alumno) => {
-                alumno.asistencia = 'falta';
+                if (alumno.asistencia === 'pendiente') {
+                    alumno.asistencia = 'falta';
+                }
             });
 
             return clase.save();
@@ -277,6 +279,7 @@ router.put('/clase/:materia/fecha/:fecha/finalizar', (req, res) => {
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 });
+
 
 // Ruta para obtener el ID de una clase específica por materia y fecha_hora
 router.get('/clase/:materia/fecha/:fecha/id', (req, res) => {
@@ -325,4 +328,35 @@ router.get('/get-clase-estado/:id', (req, res) => {
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 });
+
+
+router.put('/clase/:id/asistencia', (req, res) => {
+    const claseId = req.params.id;
+    const { alumnoId } = req.body;
+
+    Clase.findById(claseId)
+        .then((clase) => {
+            if (!clase) {
+                return res.status(404).json({ message: 'Clase no encontrada' });
+            }
+            
+            const alumno = clase.alumnos.find(a => a.matricula === alumnoId);
+            if (!alumno) {
+                return res.status(400).json({ message: 'Alumno no inscrito en esta clase' });
+            }
+            
+            alumno.asistencia = 'asistió';
+
+            return clase.save();
+        })
+        .then(() => {
+            res.status(200).json({ message: 'Estado del alumno cambiado a "asistió" exitosamente' });
+        })
+        .catch((error) => {
+            console.error('Error al cambiar el estado del alumno a "asistió":', error);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+
+
 module.exports = router;
