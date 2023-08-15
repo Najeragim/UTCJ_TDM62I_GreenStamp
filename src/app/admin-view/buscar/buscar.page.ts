@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { IonModal } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-buscar',
@@ -23,10 +24,11 @@ export class BuscarPage implements OnInit {
   listaAlumnos: any[] = [];
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private http: HttpClient,
-    private loadingController: LoadingController
-  ){
+    private loadingController: LoadingController,
+    private alertService: AlertService
+  ) {
     this.matricula = '';
     this.asistencia = 'pendiente';
     this.selectedMateria = '';
@@ -50,10 +52,10 @@ export class BuscarPage implements OnInit {
       hour: 'numeric',
       minute: 'numeric',
     };
-    
+
     // Convierte la cadena de fecha en un objeto Date
     const date = new Date(dateTime);
-    
+
     // Formatea el objeto Date utilizando las opciones especificadas
     return date.toLocaleDateString(undefined, options);
   }
@@ -92,7 +94,7 @@ export class BuscarPage implements OnInit {
         message: 'Cargando...',
       });
       await loading.present();
-  
+
       this.http
         .get<any[]>(`http://localhost:3000/api/materia/${this.selectedMateria}/fecha/${this.selectedFechaRaw}/alumnos`)
         .subscribe(
@@ -107,7 +109,7 @@ export class BuscarPage implements OnInit {
         );
     }
   }
-  
+
 
 
   //Funciones para el modal
@@ -115,37 +117,58 @@ export class BuscarPage implements OnInit {
     this.modal.dismiss();
   }
 
-  goToLogin(){
+  goToLogin() {
     this.router.navigate(['/login'])
   }
 
   //Función para agregar alumnos
   async addAlumnoAClase() {
+
+    if (!this.matricula) {
+      // Validación de campos
+      this.alertService.validarCampos();
+      return;
+    }
     const alumnoData = {
       matricula: this.matricula,
       asistencia: this.asistencia,
     };
 
     if (!this.selectedMateria || !this.selectedFechaRaw) {
-      alert('Seleccione una materia y una fecha antes de agregar un alumno.');
+      this.alertService.validarMateriaFecha();
       return;
     }
 
-    this.http
-      .post(
-        `http://localhost:3000/api/clase/${this.selectedMateria}/fecha/${this.selectedFechaRaw}/alumnos`,
-        alumnoData
-      )
-      .subscribe(
-        (response) => {
-          alert('Alumno agregado exitosamente a la clase.');
-        },
-        (error) => {
-          alert('Error al agregar el alumno a la clase.');
-          console.error('Error:', error);
-        }
-      );
+    // Verificar si la matrícula del alumno existe en la base de datos
+    this.http.get(`http://localhost:3000/api/alumno/${this.matricula}/existe`).subscribe(
+      async (response) => {
+        // Verificar si el alumno ya está en la lista de alumnos de la clase
+        const alumnoInClass = this.listaAlumnos.some(alumno => alumno.matricula === this.matricula);
 
-    this.cerrarModal();
+        if (alumnoInClass) {
+          this.alertService.alumnoYaInscritoEnClase();
+        }
+
+        // Agregar el alumno a la clase
+        this.http.post(`http://localhost:3000/api/clase/${this.selectedMateria}/fecha/${this.selectedFechaRaw}/alumnos`, alumnoData).subscribe(
+          (response) => {
+            this.alertService.alumnoInscritoEnClase();
+            this.fetchAlumnos(); // Actualizar la lista de alumnos
+          },
+          (error) => {
+            this.alertService.errorAgregarAlumnoClase();
+            console.error('Error:', error);
+          }
+        );
+
+        this.cerrarModal();
+      },
+      async (error) => {
+        // La matrícula no existe, mostrar una alerta
+        this.alertService.errorAlumnoNotFound();
+      }
+    );
   }
+
+
 }

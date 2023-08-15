@@ -35,7 +35,7 @@
   }
 
   /* Estilos de los elementos dentro del contenido del modal ion-modal ion-content ion-item */
-  ion-modal ion-content ion-item{
+  ion-modal ion-content ion-item {
     --color: #1E2B00;
     --box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     --border: 1px solid rgbA(0, 0, 0, 0.1);
@@ -87,14 +87,17 @@
       <!-- FILTROS -->
       <ion-list class="ion-padding custom-list">
         <ion-item>
-          <ion-select [(ngModel)]="selectedMateria" (ionChange)="fetchFechas()" aria-label="Materia" interface="popover" placeholder="Materia">
+          <ion-select [(ngModel)]="selectedMateria" (ionChange)="fetchFechas()" aria-label="Materia" interface="popover"
+            placeholder="Materia">
             <ion-select-option *ngFor="let materia of materias" [value]="materia">{{ materia }}</ion-select-option>
           </ion-select>
         </ion-item>
         <br>
         <ion-item *ngIf="selectedMateria">
-          <ion-select [(ngModel)]="selectedFechaRaw" (ionChange)="fetchAlumnos()" aria-label="Fecha" interface="popover" placeholder="Fecha">
-            <ion-select-option *ngFor="let fecha of fechas" [value]="fecha.raw">{{ fecha.formatted }}</ion-select-option>
+          <ion-select [(ngModel)]="selectedFechaRaw" (ionChange)="fetchAlumnos()" aria-label="Fecha" interface="popover"
+            placeholder="Fecha">
+            <ion-select-option *ngFor="let fecha of fechas" [value]="fecha.raw">{{ fecha.formatted
+              }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>

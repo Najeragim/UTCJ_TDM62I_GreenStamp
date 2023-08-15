@@ -24,7 +24,10 @@
           <a (click)="goToForgotPassword()" id="forgot-password-link">¿Olvidaste tu contraseña?</a>
         </div>
         <button id="login-button" type="submit">Iniciar sesión</button>
-        <a (click)="goToRegister()" id="register-link">¿No tienes una cuenta? Regístrate</a>
+        <p id="register-link-paragraph">
+          ¿No tienes una cuenta? <a (click)="goToRegister()" id="register-link">Regístrate</a>
+        </p>
+        
       </div>
     </form>
   </div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AlertController } from '@ionic/angular';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginPage {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private alertController: AlertController
+    private alertService: AlertService
   ) {}
 
   goToForgotPassword() {
@@ -26,16 +26,6 @@ export class LoginPage {
 
   goToRegister() {
     this.router.navigate(['/register']);
-  }
-
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      subHeader: 'Usuario no encontrado :(',
-      message: 'Verifica tus credenciales e intenta nuevamente.',
-      buttons: ['OK'],
-    });
-
-    await alert.present();
   }
 
   login() {
@@ -54,12 +44,12 @@ export class LoginPage {
           } else if (userType === 'tutor') {
             this.router.navigate(['/tabnav-tutor']);
           } else {
-            this.presentAlert();
+            this.alertService.errorUsuarioNotFound();
           }
         },
         (error) => {
           console.error('Error al iniciar sesión:', error);
-          this.presentAlert();
+          this.alertService.errorUsuarioNotFound();
         }
       );
   }

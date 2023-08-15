@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-add-tutor',
@@ -14,7 +15,7 @@ export class AddTutorPage implements OnInit {
   password: String;
   confirmPassword: String;
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient, private alertService: AlertService) {
     // Inicializar las variables aquí si es necesario
     this.matricula = '';
     this.nombre = '';
@@ -29,29 +30,59 @@ export class AddTutorPage implements OnInit {
     this.router.navigate(['/tabnav-tutor']);
   }
 
+
   register() {
-    if (this.password !== this.confirmPassword) {
-      alert('Las contraseñas no coinciden.');
+    if (!this.matricula || !this.nombre || !this.email || !this.password || !this.confirmPassword) {
+      // Validación de campos
+      this.alertService.validarCampos();
       return;
     }
-
-    const tutorData = {
-      matricula: this.matricula,
-      nombre: this.nombre,
-      email: this.email,
-      password: this.password
-    };
-
-    this.http.post('http://localhost:3000/api/register-tutor', tutorData).subscribe(
+    // Verificar si la matrícula ya está registrada
+    this.http.get(`http://localhost:3000/api/tutor/${this.matricula}/existe`).subscribe(
       (response) => {
-        alert('Usuario registrado exitosamente.');
-        this.router.navigate(['/login']);
+        this.alertService.matriculaYaRegistrada();
       },
       (error) => {
-        alert('Error al registrar el usuario.');
-        console.error('Error:', error);
+        if (error.status === 404) {
+          // Matrícula no registrada, continuar verificando el correo
+          this.http.get(`http://localhost:3000/api/tutor/email/${this.email}/existe`).subscribe(
+            (emailResponse) => {
+              this.alertService.correoYaRegistrado();
+            },
+            (emailError) => {
+              if (emailError.status === 404) {
+                // Ni la matrícula ni el correo están registrados, realizar el registro
+                const tutorData = {
+                  matricula: this.matricula,
+                  nombre: this.nombre,
+                  email: this.email,
+                  password: this.password
+                };
+                this.http.post('http://localhost:3000/api/register-tutor', tutorData).subscribe(
+                  (response) => {
+                    this.alertService.tutorRegistrado();
+                    this.router.navigate(['/tabnav-admin/buscar']);
+                  },
+                  (registrationError) => {
+                    this.alertService.errorRegistro();
+                    console.error('Error:', registrationError);
+                  }
+                );
+              } else {
+                // Error desconocido al verificar el correo
+                this.alertService.errorVerificarCorreo();
+                console.error('Error:', emailError);
+              }
+            }
+          );
+        } else {
+          // Error desconocido al verificar la matrícula
+          this.alertService.errorVerificarMatricula();
+          console.error('Error:', error);
+        }
       }
     );
   }
+  
 
 }

@@ -55,9 +55,17 @@ a{
     margin-right: 1em;
 }
 
+#register-link-paragraph{
+    color: #98B90A;
+}
+
 #register-link {
+    font-weight: bold;
     margin: 1em auto;
     text-align: center;
+    &:hover{
+        color: #35401a;
+    }
 }
 
 #forgot-password-link:hover,

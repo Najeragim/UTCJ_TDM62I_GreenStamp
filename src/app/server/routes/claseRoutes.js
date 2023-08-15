@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Clase = require('../models/clase');
+const Tutor = require('../models/tutor');
 const globalVariables = require('../globalVariables');
 const router = express.Router();
 
@@ -31,6 +32,23 @@ router.post('/register-clase', (req, res) => {
         })
         .catch((error) => {
             console.error('Error al guardar la clase en la base de datos:', error);
+            res.status(500).json({ message: 'Error Interno del Servidor' });
+        });
+});
+
+// Código para verificar si un tutor existe
+router.get('/tutor/:matricula/existe', (req, res) => {
+    const tutorMatricula = req.params.matricula;
+
+    Tutor.findOne({ matricula: tutorMatricula })
+        .then((tutor) => {
+            if (!tutor) {
+                return res.status(404).json({ message: 'Tutor no encontrado' });
+            }
+            res.status(200).json({ message: 'Tutor encontrado en la base de datos' });
+        })
+        .catch((error) => {
+            console.error('Error al verificar la existencia del tutor:', error);
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 });
