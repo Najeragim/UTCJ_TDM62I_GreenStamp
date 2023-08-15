@@ -5,28 +5,24 @@
     </ion-fab-button>
   </ion-fab>
 
-  <!-- Iniciar una Clase -->
   <h2>Inicia una clase</h2>
-  <!-- Selección de clase -->
+
   <ion-list class="ion-padding custom-list">
     <ion-item>
       <ion-select [(ngModel)]="selectedClase" (ionChange)="fetchClases()" aria-label="Fecha" interface="popover"
         placeholder="Fecha y hora">
-        <ion-select-option *ngFor="let clase of clases" [value]="clase.fecha_hora">{{ clase.formatted
-          }}</ion-select-option>
+        <ion-select-option *ngFor="let clase of clases" [value]="clase.fecha_hora">{{ clase.formatted }}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
-  <!-- Botones -->
   <div class="button-group">
-   <button id="btn-finalizar" (click)="finalizarClase()">Finalizar</button>
-     <button id="btn-iniciar" (click)="iniciarClase()">Iniciar</button>
+    <button *ngIf="showFinalizarButton" id="btn-finalizar" (click)="finalizarClase()">Finalizar</button>
+    <button *ngIf="showIniciarButton" id="btn-iniciar" (click)="iniciarClase()">Iniciar</button>
   </div>
 
   <div class="divider"></div>
 
-  <!-- Info de Clases -->
   <div id="class-info" class="container">
     <div *ngFor="let clase of clases" class="class">
       <h1 class="fecha-hora">{{ clase.formatted }}</h1>
@@ -36,5 +32,4 @@
       <div class="divider"></div>
     </div>
   </div>
-  
 </ion-content>

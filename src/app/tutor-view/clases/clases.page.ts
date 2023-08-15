@@ -11,15 +11,16 @@ export class ClasesPage implements OnInit {
   tutorMatr: string;
   selectedClase: string;
   clases: { formatted: string; fecha_hora: string; materia: string; salon: string; estado: string; }[] = [];
-  selectedClaseId: string | null = null; // Variable para almacenar el ID de la clase seleccionada
+  selectedClaseId: string | null = null;
+  showFinalizarButton: boolean = false;
+  showIniciarButton: boolean = true;
 
   constructor(private router: Router, private http: HttpClient) {
-    this.tutorMatr = ''; // El valor del tutorId se asignará al iniciar sesión
+    this.tutorMatr = '';
     this.selectedClase = '';
   }
 
   ngOnInit() {
-    // Ejemplo: Asigna el tutorId al iniciar sesión
     this.tutorMatr = '123456';
     this.fetchClases();
   }
@@ -28,7 +29,6 @@ export class ClasesPage implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  // Reemplaza la función fetchClases() actual en clases.page.ts
   fetchClases() {
     if (this.tutorMatr) {
       this.http.get<any[]>(`http://localhost:3000/api/tutor/${this.tutorMatr}/clases`).subscribe(
@@ -45,7 +45,6 @@ export class ClasesPage implements OnInit {
     }
   }
 
-
   formatDateTime(dateTime: string): string {
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
@@ -57,7 +56,6 @@ export class ClasesPage implements OnInit {
     const date = new Date(dateTime);
     return date.toLocaleDateString(undefined, options);
   }
-
 
   iniciarClase() {
     if (!this.selectedClase) {
@@ -72,18 +70,15 @@ export class ClasesPage implements OnInit {
       return;
     }
 
-    // Cambia el estado de la clase actual a "activa"
     this.http.put(`http://localhost:3000/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/estado`, { estado: 'activa' })
       .subscribe(
         () => {
           console.log('Clase activada exitosamente.');
-          // Obtener el ID de la clase seleccionada
           this.http.get(`http://localhost:3000/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/id`).subscribe(
             (data: any) => {
-              const classData: { _id: string } = data as { _id: string }; // Casting explícito
-              this.selectedClaseId = classData._id; // Guarda el ID de la clase seleccionada
+              const classData: { _id: string } = data as { _id: string };
+              this.selectedClaseId = classData._id;
 
-              // Envía el ID al ESP32
               this.http.post('http://localhost:3000/api/update-clase-id', { selectedClaseId: this.selectedClaseId }).subscribe(
                 () => {
                   console.log('ID de clase actualizado globalmente.');
@@ -93,7 +88,9 @@ export class ClasesPage implements OnInit {
                 }
               );
 
-              this.fetchClases(); // Actualiza la lista de clases
+              this.fetchClases();
+              this.showFinalizarButton = true;
+              this.showIniciarButton = false;
             },
             (error) => {
               console.error('Error al obtener el ID de la clase:', error);
@@ -119,17 +116,17 @@ export class ClasesPage implements OnInit {
       return;
     }
 
-    // Cambia el estado de la clase actual a "finalizado"
     this.http.put(`http://localhost:3000/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/finalizar`, {})
       .subscribe(
         () => {
           console.log('Clase finalizada exitosamente. Alumnos marcados como "falta".');
           this.fetchClases();
+          this.showFinalizarButton = false;
+          this.showIniciarButton = true;
         },
         (error) => {
           console.error('Error al finalizar la clase:', error);
         }
       );
   }
-
-}  
+}
