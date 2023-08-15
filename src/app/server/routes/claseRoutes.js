@@ -325,5 +325,4 @@ router.get('/get-clase-estado/:id', (req, res) => {
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 });
-
 module.exports = router;

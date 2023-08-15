@@ -27,5 +27,4 @@ router.post('/register-alumno', (req, res) => {
       res.status(500).json({ message: 'Error Interno del Servidor' });
     });
 });
-
 module.exports = router;
