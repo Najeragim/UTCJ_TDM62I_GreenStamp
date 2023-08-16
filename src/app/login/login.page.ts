@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AlertService } from '../services/alert.service';
+import { MatriculaService } from '../services/matricula.service';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,14 @@ export class LoginPage {
   email: string = "";
   password: string = "";
   errorMessage: string = "";
-  userId: string = ""; 
+  matricula: string = "";
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private alertService: AlertService
-  ) {}
+    private alertService: AlertService,
+    private matriculaService: MatriculaService
+  ) { }
 
   goToForgotPassword() {
     this.router.navigate(['/forgot-password']);
@@ -34,15 +36,16 @@ export class LoginPage {
       .subscribe(
         (response) => {
           const userType = response.userType;
-          this.userId = response.userId; // Asignar el ID del alumno a la variable userId
+          this.matricula = response.matricula; // Asignar el ID del alumno a la variable userId
+          // Actualiza la matrícula en el servicio
+          this.matriculaService.actualizarMatricula(this.matricula);
 
           if (userType === 'admin') {
-            this.router.navigate(['/tabnav-admin']);
-          } else if (userType === 'alumno') {
-            // Redirigir a la página 'tabnav-alumno' y pasar el ID del alumno en los parámetros de la URL
-            this.router.navigate(['/tabnav-alumno'], { queryParams: { userId: this.userId } });
+            this.router.navigate(['/tabnav-admin/buscar']);
           } else if (userType === 'tutor') {
-            this.router.navigate(['/tabnav-tutor']);
+            this.router.navigate(['/tabnav-tutor/listas'], { queryParams: { matricula: this.matricula } });
+          } else if (userType === 'alumno') {
+            this.router.navigate(['/tabnav-alumno/clases'], { queryParams: { matricula: this.matricula } });
           } else {
             this.alertService.errorUsuarioNotFound();
           }

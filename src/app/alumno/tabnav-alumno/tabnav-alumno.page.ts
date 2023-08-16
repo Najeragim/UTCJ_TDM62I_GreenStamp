@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatriculaService } from 'src/app/services/matricula.service';
 
 @Component({
   selector: 'app-tabnav-alumno',
@@ -7,13 +8,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./tabnav-alumno.page.scss'],
 })
 export class TabnavAlumnoPage implements OnInit {
-  userId: string = ''; // Inicializar la variable con un valor por defecto
+  matricula: string = ''; // Inicializar la variable con un valor por defecto
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private matriculaService: MatriculaService) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.userId = params['userId']; // Acceder al ID del alumno desde los parámetros de la URL
+    this.matriculaService.actualMatricula.subscribe(matricula => {
+      this.matricula = matricula;
     });
   }
 }

@@ -234,7 +234,7 @@ router.get('/alumno/:matricula/clases/pendientes', (req, res) => {
 router.get('/alumno/:matricula/clases/asistencias', (req, res) => {
     const alumnoMatricula = req.params.matricula;
 
-    Clase.find({ 'alumnos.matricula': alumnoMatricula, estado: { $in: ['en curso', 'terminada'] } })
+    Clase.find({ 'alumnos.matricula': alumnoMatricula, estado: { $in: ['activa', 'finalizada'] } })
         .then((clases) => {
             res.status(200).json(clases);
         })
@@ -262,7 +262,8 @@ router.put('/clase/:materia/fecha/:fecha/estado', (req, res) => {
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 });
-// Ruta para cambiar el estado de una clase a "finalizado" si está en estado "activa"
+
+// Ruta para cambiar el estado de una clase a "finalizada" si está en estado "activa"
 router.put('/clase/:materia/fecha/:fecha/finalizar', (req, res) => {
     const materia = req.params.materia;
     const fecha_hora = req.params.fecha;
@@ -277,8 +278,8 @@ router.put('/clase/:materia/fecha/:fecha/finalizar', (req, res) => {
                 return res.status(400).json({ message: 'El estado actual de la clase no es "activa"' });
             }
 
-            // Cambiar el estado a "finalizado" solo si el estado actual es "activa"
-            clase.estado = 'finalizado';
+            // Cambiar el estado a "finalizada" solo si el estado actual es "activa"
+            clase.estado = 'finalizada';
 
             // Cambiar el estado de los alumnos a "falta" solo si su estado actual es "pendiente"
             clase.alumnos.forEach((alumno) => {
@@ -290,7 +291,7 @@ router.put('/clase/:materia/fecha/:fecha/finalizar', (req, res) => {
             return clase.save();
         })
         .then(() => {
-            res.status(200).json({ message: 'Estado de la clase cambiado a "finalizado", alumnos marcados como "falta"' });
+            res.status(200).json({ message: 'Estado de la clase cambiado a "finalizada", alumnos marcados como "falta"' });
         })
         .catch((error) => {
             console.error('Error al cambiar el estado de la clase:', error);
@@ -363,15 +364,15 @@ router.put('/clase/:id/asistencia', (req, res) => {
                 return res.status(400).json({ message: 'Alumno no inscrito en esta clase' });
             }
             
-            alumno.asistencia = 'asistió';
+            alumno.asistencia = 'asistido';
 
             return clase.save();
         })
         .then(() => {
-            res.status(200).json({ message: 'Estado del alumno cambiado a "asistió" exitosamente' });
+            res.status(200).json({ message: 'Estado del alumno cambiado a "asistido" exitosamente' });
         })
         .catch((error) => {
-            console.error('Error al cambiar el estado del alumno a "asistió":', error);
+            console.error('Error al cambiar el estado del alumno a "asistido":', error);
             res.status(500).json({ message: 'Error Interno del Servidor' });
         });
 });

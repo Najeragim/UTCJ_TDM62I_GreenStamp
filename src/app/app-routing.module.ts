@@ -16,14 +16,6 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'forgot-password',
-    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
-  },
-  {
-    path: 'recover',
-    loadChildren: () => import('./recover/recover.module').then( m => m.RecoverPageModule)
-  },
-  {
     path: 'tabnav-admin',
     loadChildren: () => import('./admin-view/tabnav-admin/tabnav-admin.module').then( m => m.TabnavAdminPageModule)
   },

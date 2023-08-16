@@ -53,6 +53,9 @@ a{
 
 #forgot-password-link {
     margin-right: 1em;
+    &:hover{
+        color: #35401a;
+    }
 }
 
 #register-link-paragraph{
@@ -68,11 +71,6 @@ a{
     }
 }
 
-#forgot-password-link:hover,
-#register-link:hover{
-    color: #35401a;
-}
-
 #login-button {
     width: 100%;
     padding: 1.5em;
@@ -86,7 +84,7 @@ a{
     cursor: pointer;
     &:hover{
         background-image: linear-gradient(to right top, #1e2b00, #233008, #29350f, #2f3b14, #35401a);
-    color: #fff;
+        color: #fff;
     }
 }
 

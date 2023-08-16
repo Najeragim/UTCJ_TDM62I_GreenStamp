@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MatriculaService } from 'src/app/services/matricula.service';
 
 @Component({
   selector: 'app-clases',
@@ -12,13 +13,16 @@ export class ClasesPage implements OnInit {
   alumnoMatr: string;
   clases: { fecha_hora: string; materia: string; profesor: string; salon: string }[] = [];
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient, private matriculaService: MatriculaService) {
     this.alumnoMatr = '';
   }
 
   ngOnInit() {
+    this.matriculaService.actualMatricula.subscribe(matricula => {
+      this.alumnoMatr = matricula;
+    });
     // Ejemplo: Asigna la matrícula del alumno al iniciar sesión
-    this.alumnoMatr = '21311212';
+    //this.alumnoMatr = '21311212';
     this.fetchClasesPendientes();
   }
 

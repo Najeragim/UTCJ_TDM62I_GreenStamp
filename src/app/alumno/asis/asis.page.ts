@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MatriculaService } from 'src/app/services/matricula.service';
 
 @Component({
   selector: 'app-asis',
@@ -10,14 +11,29 @@ import { HttpClient } from '@angular/common/http';
 export class AsisPage implements OnInit {
 
   alumnoMatr: string;
-  clases: { fecha_hora: string; materia: string; profesor: string; alumnos: { matricula: string; asistencia: string }[] }[] = [];
+  clases: { 
+    fecha_hora: string; 
+    materia: string; 
+    profesor: string; 
+    alumnos: { 
+      matricula: string; 
+      asistencia: string 
+    }[] 
+  }[] = [];
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(
+    private router: Router, 
+    private http: HttpClient, 
+    private matriculaService: MatriculaService
+  ) {
     this.alumnoMatr = '';
   }
 
   ngOnInit() {
-    this.alumnoMatr = '21311212';
+    this.matriculaService.actualMatricula.subscribe(matricula => {
+      this.alumnoMatr = matricula;
+    });
+    //this.alumnoMatr = '21311212';
     this.fetchAsistencias();
   }
 

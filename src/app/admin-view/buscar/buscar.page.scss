@@ -52,9 +52,8 @@
         margin-top: 1em;
     }
 
-    #open-modal,
-    #btn-gen-doc {
-        width: 40%;
+    #open-modal {
+        width: 70%;
         padding: 1.5em;
         margin: auto;
         box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
@@ -62,19 +61,6 @@
         border-radius: 2em;
         font-weight: bold;
         cursor: pointer;
-    }
-
-    #open-modal {
-        background-color: #ffffff;
-        color: #4A6F00;
-
-        &:hover {
-            background-image: linear-gradient(to right top, #1e2b00, #233008, #29350f, #2f3b14, #35401a);
-            color: #fff;
-        }
-    }
-
-    #btn-gen-doc {
         background-color: #ffffff;
         color: #4A6F00;
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MatriculaService } from 'src/app/services/matricula.service';
 
 @Component({
   selector: 'app-listas',
@@ -16,15 +17,17 @@ export class ListasPage implements OnInit {
   selectedFechaRaw: string;
   clase: any; // Variable para almacenar la clase seleccionada
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient, private matriculaService: MatriculaService) {
     this.selectedMateria = '';
     this.selectedFechaRaw = '';
     this.tutorMatr = ''; // El valor del tutorId se asignará al iniciar sesión
   }
 
   ngOnInit() {
-    // Ejemplo: Asigna el tutorId al iniciar sesión
-    this.tutorMatr = '123456';
+    this.matriculaService.actualMatricula.subscribe(matricula => {
+      this.tutorMatr = matricula;
+    });
+    //this.tutorMatr = '123456';
 
     // Carga las materias correspondientes al tutor al iniciar la página
     this.fetchMaterias();

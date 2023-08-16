@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MatriculaService } from 'src/app/services/matricula.service';
 
 @Component({
   selector: 'app-clases',
@@ -15,13 +16,16 @@ export class ClasesPage implements OnInit {
   showFinalizarButton: boolean = false;
   showIniciarButton: boolean = true;
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient, private matriculaService: MatriculaService) {
     this.tutorMatr = '';
     this.selectedClase = '';
   }
 
   ngOnInit() {
-    this.tutorMatr = '123456';
+    this.matriculaService.actualMatricula.subscribe(matricula => {
+      this.tutorMatr = matricula;
+    });
+    //this.tutorMatr = '123456';
     this.fetchClases();
   }
 

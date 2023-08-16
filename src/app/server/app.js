@@ -36,6 +36,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors()); // Configura CORS como middleware global
 
+// Rutas para las demás funcionalidades (registros, etc.)
+app.use('/api', alumnoRoutes);
+app.use('/api', adminRoutes);
+app.use('/api', tutorRoutes);
+app.use('/api', claseRoutes);
+
 // Ruta para autenticar al usuario
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
@@ -48,19 +54,19 @@ app.post('/api/login', async (req, res) => {
     // Buscar al usuario en las colecciones correspondientes según el tipo de usuario
     const admin = await Admin.findOne({ email, password }).exec();
     if (admin) {
-      return res.json({ userType: 'admin', userId: admin._id });
+      return res.json({ userType: 'admin' });
     }
 
-    // Si no es un administrador, busca en la colección de alumnos
-    const alumno = await Alumno.findOne({ email, password }).exec();
-    if (alumno) {
-      return res.json({ userType: 'alumno', userId: alumno._id });
-    }
-
-    // Si no es un alumno, busca en la colección de tutores
+    // Si no es un admin, busca en la colección de tutores
     const tutor = await Tutor.findOne({ email, password }).exec();
     if (tutor) {
-      return res.json({ userType: 'tutor', userId: tutor._id });
+      return res.json({ userType: 'tutor', matricula: tutor.matricula });
+    }
+
+    // Si no es un tutor, busca en la colección de alumnos
+    const alumno = await Alumno.findOne({ email, password }).exec();
+    if (alumno) {
+      return res.json({ userType: 'alumno', matricula: alumno.matricula });
     }
 
     // Si no se encuentra el usuario en ninguna colección, la autenticación falla
@@ -71,11 +77,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Rutas para las demás funcionalidades (registros, etc.)
-app.use('/api', alumnoRoutes);
-app.use('/api', adminRoutes);
-app.use('/api', tutorRoutes);
-app.use('/api', claseRoutes);
+
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;
