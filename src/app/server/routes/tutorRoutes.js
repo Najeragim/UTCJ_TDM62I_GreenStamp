@@ -12,13 +12,13 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 // Ruta de registro
 router.post('/register-tutor', (req, res) => {
-  const { matricula, nombre, email, password } = req.body;
+  const { matricula, nombre, email, password, claseActiva } = req.body;
 
   if (!matricula || !nombre || !email || !password) {
     return res.status(400).json({ message: 'Proporcione todos los datos' });
   }
 
-  const newTutor = new Tutor({ matricula, nombre, email, password });
+  const newTutor = new Tutor({ matricula, nombre, email, password, claseActiva });
 
   newTutor.save()
     .then(() => {

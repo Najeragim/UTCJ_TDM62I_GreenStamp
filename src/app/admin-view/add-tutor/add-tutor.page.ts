@@ -56,7 +56,8 @@ export class AddTutorPage implements OnInit {
                   matricula: this.matricula,
                   nombre: this.nombre,
                   email: this.email,
-                  password: this.password
+                  password: this.password,
+                  claseActiva: 'NA',
                 };
                 this.http.post('http://localhost:3000/api/register-tutor', tutorData).subscribe(
                   (response) => {

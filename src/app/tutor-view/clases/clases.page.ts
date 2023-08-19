@@ -25,7 +25,6 @@ export class ClasesPage implements OnInit {
     this.matriculaService.actualMatricula.subscribe(matricula => {
       this.tutorMatr = matricula;
     });
-    //this.tutorMatr = '123456';
     this.fetchClases();
   }
 
@@ -83,7 +82,7 @@ export class ClasesPage implements OnInit {
               const classData: { _id: string } = data as { _id: string };
               this.selectedClaseId = classData._id;
 
-              this.http.post('http://localhost:3000/api/update-clase-id', { selectedClaseId: this.selectedClaseId }).subscribe(
+              this.http.post(`http://localhost:3000/api/clase/${this.selectedClaseId}/tutor/${this.tutorMatr}/actualizar`, {}).subscribe(
                 () => {
                   console.log('ID de clase actualizado globalmente.');
                 },

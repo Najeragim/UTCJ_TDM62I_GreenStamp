@@ -5,6 +5,7 @@ const tutorSchema = new mongoose.Schema({
   nombre: {type: String, required: true},
   email: { type: String, required: true },
   password: { type: String, required: true },
+  claseActiva: {type: String, required: true}
 });
 
 const Tutor = mongoose.model('Tutor', tutorSchema);
