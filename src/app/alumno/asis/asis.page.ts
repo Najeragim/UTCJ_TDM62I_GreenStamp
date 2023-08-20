@@ -44,7 +44,7 @@ export class AsisPage implements OnInit {
 
   fetchAsistencias() {
     if (this.alumnoMatr) {
-      this.http.get<any[]>(`http://localhost:3000/api/alumno/${this.alumnoMatr}/clases/asistencias`).subscribe(
+      this.http.get<any[]>(`https://green-stamp-api.onrender.com/api/alumno/${this.alumnoMatr}/clases/asistencias`).subscribe(
         (data) => {
           this.clases = data.map((item) => {
             const formattedDate = this.formatDateTime(item.fecha_hora);

@@ -34,7 +34,7 @@ export class AddClassPage implements OnInit {
       return;
     }
     // Verificar si el tutor con la matrícula existe en la base de datos
-    this.http.get(`http://localhost:3000/api/tutor/${this.tutor}/existe`).subscribe(
+    this.http.get(`https://green-stamp-api.onrender.com/api/tutor/${this.tutor}/existe`).subscribe(
       (response) => {
         // Si el tutor existe, procede con el registro de la clase
         const claseData = {
@@ -46,7 +46,7 @@ export class AddClassPage implements OnInit {
           salon: this.salon
         };
 
-        this.http.post('http://localhost:3000/api/register-clase', claseData).subscribe(
+        this.http.post('https://green-stamp-api.onrender.com/api/register-clase', claseData).subscribe(
           (response) => {
             this.alertService.claseRegistrada();
             this.router.navigate(['/tabnav-admin/buscar']);

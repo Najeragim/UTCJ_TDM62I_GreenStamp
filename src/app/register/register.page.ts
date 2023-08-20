@@ -54,22 +54,22 @@ export class RegisterPage implements OnInit {
       password: this.password
     };
 
-    this.http.get(`http://localhost:3000/api/alumno/${alumnoData.matricula}/existe`).subscribe(
+    this.http.get(`https://green-stamp-api.onrender.com/api/alumno/${alumnoData.matricula}/existe`).subscribe(
       (response) => {
         this.alertService.alumnoYaRegistrado();
       },
       (error) => {
-        this.http.get(`http://localhost:3000/api/alumno/${alumnoData.rfid}/existe`).subscribe(
+        this.http.get(`https://green-stamp-api.onrender.com/api/alumno/${alumnoData.rfid}/existe`).subscribe(
           (response) => {
             this.alertService.rfidYaRegistrado();
           },
           (error) => {
-            this.http.get(`http://localhost:3000/api/alumno/email/${alumnoData.email}/existe`).subscribe(
+            this.http.get(`https://green-stamp-api.onrender.com/api/alumno/email/${alumnoData.email}/existe`).subscribe(
               (response) => {
                 this.alertService.correoYaRegistrado();
               },
               (error) => {
-                this.http.post('http://localhost:3000/api/register-alumno', alumnoData).subscribe(
+                this.http.post('https://green-stamp-api.onrender.com/api/register-alumno', alumnoData).subscribe(
                   (response) => {
                     this.alertService.alumnoRegistrado();
                     this.router.navigate(['/login']);

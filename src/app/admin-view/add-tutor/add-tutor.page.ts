@@ -38,14 +38,14 @@ export class AddTutorPage implements OnInit {
       return;
     }
     // Verificar si la matrícula ya está registrada
-    this.http.get(`http://localhost:3000/api/tutor/${this.matricula}/existe`).subscribe(
+    this.http.get(`https://green-stamp-api.onrender.com/api/tutor/${this.matricula}/existe`).subscribe(
       (response) => {
         this.alertService.matriculaYaRegistrada();
       },
       (error) => {
         if (error.status === 404) {
           // Matrícula no registrada, continuar verificando el correo
-          this.http.get(`http://localhost:3000/api/tutor/email/${this.email}/existe`).subscribe(
+          this.http.get(`https://green-stamp-api.onrender.com/api/tutor/email/${this.email}/existe`).subscribe(
             (emailResponse) => {
               this.alertService.correoYaRegistrado();
             },
@@ -59,7 +59,7 @@ export class AddTutorPage implements OnInit {
                   password: this.password,
                   claseActiva: 'NA',
                 };
-                this.http.post('http://localhost:3000/api/register-tutor', tutorData).subscribe(
+                this.http.post('https://green-stamp-api.onrender.com/api/register-tutor', tutorData).subscribe(
                   (response) => {
                     this.alertService.tutorRegistrado();
                     this.router.navigate(['/tabnav-admin/buscar']);

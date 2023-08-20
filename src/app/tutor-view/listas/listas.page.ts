@@ -51,7 +51,7 @@ export class ListasPage implements OnInit {
 
   fetchMaterias() {
     // Realiza una solicitud para obtener las materias según el tutor
-    this.http.get<string[]>(`http://localhost:3000/api/tutor/${this.tutorMatr}/materias`).subscribe(
+    this.http.get<string[]>(`https://green-stamp-api.onrender.com/api/tutor/${this.tutorMatr}/materias`).subscribe(
       (data) => {
         this.materias = data;
       },
@@ -64,7 +64,7 @@ export class ListasPage implements OnInit {
   fetchFechas() {
     // Realiza una solicitud para obtener las fechas según la materia y el tutor
     if (this.selectedMateria) {
-      this.http.get<any[]>(`http://localhost:3000/api/tutor/${this.tutorMatr}/materia/${this.selectedMateria}/fechas`).subscribe(
+      this.http.get<any[]>(`https://green-stamp-api.onrender.com/api/tutor/${this.tutorMatr}/materia/${this.selectedMateria}/fechas`).subscribe(
         (data) => {
           this.fechas = data.map((item) => {
             const formattedDate = this.formatDateTime(item.fecha_hora);
@@ -81,7 +81,7 @@ export class ListasPage implements OnInit {
   fetchClase() {
     // Realiza una solicitud para obtener la clase según la fecha, materia y tutor
     if (this.selectedFechaRaw) {
-      this.http.get<any[]>(`http://localhost:3000/api/tutor/${this.tutorMatr}/materia/${this.selectedMateria}/fecha/${this.selectedFechaRaw}`).subscribe(
+      this.http.get<any[]>(`https://green-stamp-api.onrender.com/api/tutor/${this.tutorMatr}/materia/${this.selectedMateria}/fecha/${this.selectedFechaRaw}`).subscribe(
         (data) => {
           this.clase = data;
         },

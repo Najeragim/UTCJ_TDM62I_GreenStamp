@@ -34,7 +34,7 @@ export class ClasesPage implements OnInit {
 
   fetchClases() {
     if (this.tutorMatr) {
-      this.http.get<any[]>(`http://localhost:3000/api/tutor/${this.tutorMatr}/clases`).subscribe(
+      this.http.get<any[]>(`https://green-stamp-api.onrender.com/api/tutor/${this.tutorMatr}/clases`).subscribe(
         (data) => {
           this.clases = data.map((item) => {
             const formattedDate = this.formatDateTime(item.fecha_hora);
@@ -73,16 +73,16 @@ export class ClasesPage implements OnInit {
       return;
     }
 
-    this.http.put(`http://localhost:3000/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/estado`, { estado: 'activa' })
+    this.http.put(`https://green-stamp-api.onrender.com/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/estado`, { estado: 'activa' })
       .subscribe(
         () => {
           console.log('Clase activada exitosamente.');
-          this.http.get(`http://localhost:3000/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/id`).subscribe(
+          this.http.get(`https://green-stamp-api.onrender.com/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/id`).subscribe(
             (data: any) => {
               const classData: { _id: string } = data as { _id: string };
               this.selectedClaseId = classData._id;
 
-              this.http.post(`http://localhost:3000/api/clase/${this.selectedClaseId}/tutor/${this.tutorMatr}/actualizar`, {}).subscribe(
+              this.http.post(`https://green-stamp-api.onrender.com/api/clase/${this.selectedClaseId}/tutor/${this.tutorMatr}/actualizar`, {}).subscribe(
                 () => {
                   console.log('ID de clase actualizado globalmente.');
                 },
@@ -119,7 +119,7 @@ export class ClasesPage implements OnInit {
       return;
     }
 
-    this.http.put(`http://localhost:3000/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/finalizar`, {})
+    this.http.put(`https://green-stamp-api.onrender.com/api/clase/${selectedClass.materia}/fecha/${selectedClass.fecha_hora}/finalizar`, {})
       .subscribe(
         () => {
           console.log('Clase finalizada exitosamente. Alumnos marcados como "falta".');

@@ -33,7 +33,7 @@ export class ClasesPage implements OnInit {
 
   fetchClasesPendientes() {
     if (this.alumnoMatr) {
-      this.http.get<any[]>(`http://localhost:3000/api/alumno/${this.alumnoMatr}/clases/pendientes`).subscribe(
+      this.http.get<any[]>(`https://green-stamp-api.onrender.com/api/alumno/${this.alumnoMatr}/clases/pendientes`).subscribe(
         (data) => {
           this.clases = data.map((item) => {
             const formattedDate = this.formatDateTime(item.fecha_hora);

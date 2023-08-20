@@ -45,7 +45,7 @@ export class AddAdminPage implements OnInit {
       return;
     }
 
-    this.http.get(`http://localhost:3000/api/tutor/email/${this.email}/existe`).subscribe(
+    this.http.get(`https://green-stamp-api.onrender.com/api/tutor/email/${this.email}/existe`).subscribe(
       async (response) => {
         await this.alertService.correoYaRegistrado();
       },
@@ -56,7 +56,7 @@ export class AddAdminPage implements OnInit {
             email: this.email,
             password: this.password,
           };
-          this.http.post('http://localhost:3000/api/register-admin', adminData).subscribe(
+          this.http.post('https://green-stamp-api.onrender.com/api/register-admin', adminData).subscribe(
             (response) => {
               this.alertService.adminRegistrado();
               this.router.navigate(['/tabnav-admin/buscar']);

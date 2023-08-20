@@ -32,7 +32,7 @@ export class LoginPage {
 
   login() {
     this.http
-      .post<any>('http://localhost:3000/api/login', { email: this.email, password: this.password })
+      .post<any>('https://green-stamp-api.onrender.com/api/login', { email: this.email, password: this.password })
       .subscribe(
         (response) => {
           const userType = response.userType;

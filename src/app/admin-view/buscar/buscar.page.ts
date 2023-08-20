@@ -61,7 +61,7 @@ export class BuscarPage implements OnInit {
   }
 
   fetchMaterias() {
-    this.http.get<string[]>('http://localhost:3000/api/materias').subscribe(
+    this.http.get<string[]>('https://green-stamp-api.onrender.com/api/materias').subscribe(
       (data) => {
         this.materias = data;
       },
@@ -73,7 +73,7 @@ export class BuscarPage implements OnInit {
 
   async fetchFechas() {
     if (this.selectedMateria) {
-      this.http.get<any[]>(`http://localhost:3000/api/materia/${this.selectedMateria}/fechas`).subscribe(
+      this.http.get<any[]>(`https://green-stamp-api.onrender.com/api/materia/${this.selectedMateria}/fechas`).subscribe(
         (data) => {
           // Guarda ambos valores de fecha correctamente en la propiedad fechas
           this.fechas = data.map((item) => {
@@ -96,7 +96,7 @@ export class BuscarPage implements OnInit {
       await loading.present();
 
       this.http
-        .get<any[]>(`http://localhost:3000/api/materia/${this.selectedMateria}/fecha/${this.selectedFechaRaw}/alumnos`)
+        .get<any[]>(`https://green-stamp-api.onrender.com/api/materia/${this.selectedMateria}/fecha/${this.selectedFechaRaw}/alumnos`)
         .subscribe(
           (data) => {
             this.listaAlumnos = data;
@@ -140,7 +140,7 @@ export class BuscarPage implements OnInit {
     }
 
     // Verificar si la matrícula del alumno existe en la base de datos
-    this.http.get(`http://localhost:3000/api/alumno/${this.matricula}/existe`).subscribe(
+    this.http.get(`https://green-stamp-api.onrender.com/api/alumno/${this.matricula}/existe`).subscribe(
       async (response) => {
         // Verificar si el alumno ya está en la lista de alumnos de la clase
         const alumnoInClass = this.listaAlumnos.some(alumno => alumno.matricula === this.matricula);
@@ -150,7 +150,7 @@ export class BuscarPage implements OnInit {
         }
 
         // Agregar el alumno a la clase
-        this.http.post(`http://localhost:3000/api/clase/${this.selectedMateria}/fecha/${this.selectedFechaRaw}/alumnos`, alumnoData).subscribe(
+        this.http.post(`https://green-stamp-api.onrender.com/api/clase/${this.selectedMateria}/fecha/${this.selectedFechaRaw}/alumnos`, alumnoData).subscribe(
           (response) => {
             this.alertService.alumnoInscritoEnClase();
             this.fetchAlumnos(); // Actualizar la lista de alumnos
